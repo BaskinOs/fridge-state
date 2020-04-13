@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { hot } from "react-hot-loader";
-import "./App.css";
+import styles from "./styles/styles.scss";
 
 class App extends Component {
   render() {
