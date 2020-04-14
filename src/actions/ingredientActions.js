@@ -40,3 +40,23 @@ export const getIngredients = () => (dispatch, getState) =>
         });
       }
     });
+
+export const deleteIngredient = () => (dispatch, getState) =>
+  axios
+    .delete('/api/ingredients', {
+      user_id: getState().user.userId,
+      ingredient
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data
+        });
+      } else {
+        dispatch({
+          type: types.DELETE_INGREDIENTS,
+          payload: data
+        });
+      }
+    });
