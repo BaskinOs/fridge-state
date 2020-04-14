@@ -1,6 +1,6 @@
 // import actionType constants
-import axios from 'axios';
-import * as types from '../constants/actionTypes';
+// import axios from 'axios';
+// import * as types from '../constants/actionTypes';
 
 /*
 export const verifyLogin = () => dispatch => 
@@ -39,4 +39,3 @@ export const getUserData = () => dispatch =>
       }
     })
 */
-
