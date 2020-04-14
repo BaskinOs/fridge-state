@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import Wrapper from "./containers/Wrapper";
 
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import Landing from './Landing';
+import Fridge from './Fridge';
+import Ingredients from './Ingredients';
+import Recipes from './Recipes';
+import Instructions from './Instructions';
+import Dashboard from './Dashboard';
+
 const mapStateToProps = ({ user: { isLoggedIn } }) => ({
   isLoggedIn
 });
@@ -15,12 +24,19 @@ class MainContainer extends Component {
 
   render() {
     return (
-      <div className="MainContainer">
-        <h2>Helloooooooooo</h2>
-        <input type="text"></input>
-      </div>
+      <BrowserRouter>
+        <div className="MainContainer">Main Container</div>
+        <Route path="/" exact component={Landing} />
+        <Route path="/fridge" render={() => <Fridge />} />
+        <Route path="/ingredients" render={() => <Ingredients />} />
+        <Route path="/recipes" render={() => <Recipes />} />
+        <Route path="/instructions" render={() => <Instructions />} />
+        <Route path="/dashboard" render={() => <Dashboard />} />
+      </BrowserRouter>
     );
   }
 }
+
+// webpack history dev server historyfallback : true
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
