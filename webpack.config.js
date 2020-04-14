@@ -1,34 +1,40 @@
-const path = require("path");
-const webpack = require("webpack");
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: "./src/index.js",
   mode: process.env.NODE_ENV,
+  entry: "./src/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist/"),
+    filename: "bundle.js",
+    publicPath: "/dist/",
+  },
+  devServer: {
+    port: 8080,
+    contentBase: path.join(__dirname, "public"),
+    proxy: [
+      {
+        context: ['/api', '/auth'],
+        target: 'http://localhost:3000',
+      },
+    ],
+    hot: true,
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
-        loader: "babel-loader",
-        options: { presets: ["@babel/env"] },
+        loader: 'babel-loader',
+        options: { presets: ['@babel/env'] }
       },
       {
         test: /\.s?[ac]ss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
-      },
-    ],
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      }
+    ]
   },
   resolve: { extensions: ["*", ".js", ".jsx"] },
-  output: {
-    path: path.resolve(__dirname, "dist/"),
-    publicPath: "/dist/",
-    filename: "bundle.js",
-  },
-  devServer: {
-    contentBase: path.join(__dirname, "public/"),
-    port: 3000,
-    publicPath: "http://localhost:3000/dist/",
-    hotOnly: true,
-  },
   plugins: [new webpack.HotModuleReplacementPlugin()],
 };

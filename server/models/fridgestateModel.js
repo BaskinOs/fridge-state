@@ -24,6 +24,5 @@ const User = new Schema({
 const ModelUser = mongoose.model('user', User);
 
 module.exports = {
-  ModelRecipes,
   ModelUser,
 };
