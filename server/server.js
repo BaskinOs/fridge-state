@@ -2,10 +2,10 @@ require("dotenv").config(); //dotenv configuration should be in line 1
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const passport = require("passport");
 
 //import routes
 const authRouter = require("./routes/auth");
+const passportSetup = require("../config/passport-setup");
 // const apiRouter = require("./routes/api");
 // import { initialiseAuthentication } from "./auth";
 
@@ -14,7 +14,7 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(passport.initialize());
+// app.use(passport.initialize());
 
 //Route handlers
 // app.use("/api", apiRouter);

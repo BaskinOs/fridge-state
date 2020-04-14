@@ -1,6 +1,5 @@
 const express = require("express");
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 const authRouter = express.Router();
 
@@ -21,17 +20,15 @@ authRouter.get('/logout', (req, res) => {
   res.send('loggin out')
 })
 
-//auth with google
-authRouter.get('/google', (req, res) => {
-  console.log('in /google');
-  //handle with passport
-  res.send('logging in with google');
-})
+//auth with google using passport
+authRouter.get('/google', passport.authenticate('google', {
+  scope: ['profile']
+}));
 
-authRouter.get('/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/auth' }),
-  function(req, res) {
-    res.redirect('/');
-  });
+// authRouter.get('/google/callback', 
+//   passport.authenticate('google', { failureRedirect: '/auth' }),
+//   function(req, res) {
+//     res.redirect('/');
+//   });
 
 module.exports= authRouter;
