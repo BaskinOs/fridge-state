@@ -20,10 +20,16 @@ authRouter.get('/logout', (req, res) => {
   res.send('loggin out')
 })
 
+
 //auth with google using passport
 authRouter.get('/google', passport.authenticate('google', {
   scope: ['profile']
 }));
+
+//callback route for google redirect
+authRouter.get('/google/callback', (res, req) => {
+  res.send('you reached callback URI');
+});
 
 // authRouter.get('/google/callback', 
 //   passport.authenticate('google', { failureRedirect: '/auth' }),

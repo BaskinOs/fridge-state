@@ -19,6 +19,7 @@ app.use(cookieParser());
 //Route handlers
 // app.use("/api", apiRouter);
 app.use("/auth", authRouter);
+
 app.use('/api', (req, res) => {
   console.log('in api');
   res.send('hello');
