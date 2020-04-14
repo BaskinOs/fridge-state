@@ -36,7 +36,7 @@
             "warn",
             {
                 "code": 80,
-                "tabWidth": 4,
+                "tabWidth": 2,
                 "comments": 100,
                 "ignoreComments": false,
                 "ignoreTrailingComments": true,
