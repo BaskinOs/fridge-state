@@ -4,22 +4,6 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 const authRouter = express.Router();
 
-// Use the GoogleStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, and Google
-//   profile), and invoke a callback with a user object.
-passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://localhost:3000/auth/google/callback"
-},
-function(accessToken, refreshToken, profile, done) {
-     User.findOrCreate({ googleId: profile.id }, function (err, user) {
-       return done(err, user);
-     });
-}
-));
-
 // authRouter.get('/login', (req, res) => {
 //   const { email, password } = req.body
 //   return res.status(200).json({ success: true, data })
@@ -41,8 +25,7 @@ authRouter.get('/logout', (req, res) => {
 authRouter.get('/google', (req, res) => {
   console.log('in /google');
   //handle with passport
-  // res.send('logging in with google');
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] })
+  res.send('logging in with google');
 })
 
 authRouter.get('/google/callback', 
