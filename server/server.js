@@ -1,10 +1,31 @@
+require("dotenv").config(); //dotenv configuration should be in line 1
 const express = require("express");
 const path = require("path");
+const cookieParser = require("cookie-parser");
+const passport = require("passport");
+
+//import routes
+const authRouter = require("./routes/auth");
+// const apiRouter = require("./routes/api");
+// import { initialiseAuthentication } from "./auth";
 
 const app = express();
-const PORT = 8080;
+const PORT = 3000;
 
 app.use(express.json());
+app.use(cookieParser());
+app.use(passport.initialize());
+
+//Route handlers
+// app.use("/api", apiRouter);
+app.use("/auth", authRouter);
+app.use('/api', (req, res) => {
+  console.log('in api');
+  res.send('hello');
+})
+
+// handle static files
+app.use("/dist", express.static(path.join(__dirname, "../dist")));
 
 // Production mode serves bundle/index.html
 if (process.env.NODE_ENV === "production") {
@@ -16,6 +37,9 @@ if (process.env.NODE_ENV === "production") {
     res.status(200).sendFile(path.join(__dirname, "../public/index.html"));
   });
 }
+
+// catch-all for unknown routes
+app.use((req, res) => res.sendStatus(404));
 
 // error handler
 app.use((err, req, res, next) => {
