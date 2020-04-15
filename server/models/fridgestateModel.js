@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const myURI =
-  'mongodb+srv://baskin:codesmith@cluster0-nrhsa.gcp.mongodb.net/test?retryWrites=true&w=majority';
+const myURI = process.env.DB_CONNECTION_STRING;
 
 mongoose
   .connect(myURI, {
