@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as IngredientActions from '../actions/ingredientActions';
 import * as UserActions from '../actions/userActions';
+import * as RecipeActions from '../actions/recipeAction';
 // import Wrapper from "./containers/Wrapper";
 
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -21,7 +22,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ ...IngredientActions, ...UserActions }, dispatch);
+  bindActionCreators(
+    { ...IngredientActions, ...UserActions, ...RecipeActions },
+    dispatch
+  );
 
 class MainContainer extends Component {
   constructor(props) {
