@@ -21,7 +21,8 @@ export const postIngredient = () => (dispatch, getState) =>
         payload: data
       });
       // }
-    });
+    })
+    .catch((err) => console.log(`ERR in postIngredient Action: ${err}`));
 
 export const getIngredients = () => (dispatch, getState) =>
   axios
@@ -40,7 +41,8 @@ export const getIngredients = () => (dispatch, getState) =>
           payload: data
         });
       }
-    });
+    })
+    .catch((err) => console.log(`ERR in getIngredients Action: ${err}`));
 
 export const deleteIngredient = () => (dispatch, getState) =>
   axios
@@ -60,7 +62,8 @@ export const deleteIngredient = () => (dispatch, getState) =>
           payload: data
         });
       }
-    });
+    })
+    .catch((err) => console.log(`ERR in deleteIngredient Action: ${err}`));
 
 export const updateIngredient = (event) => ({
   type: types.UPDATE_INGREDIENT,
