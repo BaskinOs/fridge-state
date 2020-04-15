@@ -16,7 +16,6 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(cookieParser());
-app.use("/api", apiRouter);
 
 // app.use(passport.initialize());
 
@@ -32,6 +31,7 @@ app.use(passport.session());
 
 //Route handlers
 app.use("/auth", authRouter);
+app.use("/api", apiRouter);
 
 // handle static files
 app.use("/dist", express.static(path.join(__dirname, "../dist")));

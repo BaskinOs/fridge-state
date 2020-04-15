@@ -10,12 +10,14 @@ const userState = {
 const userReducer = (state = userState, action) => {
   switch (action.type) {
     case types.USER_LOGIN:
+      console.log('userReducer USER_LOGIN');
       return {
         ...state,
         isLoggedIn: true
       };
 
     case types.USER_LOGOUT:
+      console.log('userReducer USER_LOGOUT');
       return {
         userId: '',
         userName: '',
