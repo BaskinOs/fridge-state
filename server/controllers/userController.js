@@ -3,26 +3,11 @@ const { ModelUser } = require('../models/fridgestateModel');
 
 const userController = {};
 
-userController.getIngredients = (req, res, next) => {
-  console.log('inside GET INGREDIENTS');
-  ModelUser.findById('5e9672ca8687611204c9b017', (err, user) => {
-    if (err) {
-      console.log(err);
-    }
-    res.locals.ingredients = user.ingredients;
-    console.log(res.locals.ingredients);
-    return next();
-  });
-};
 //controller to verify user login
 userController.verify = (req, res, next) => {
   try {
     //use userId in req.session.user to verify user
     if (req.session.passport.user) {
-      console.log(
-        'userController.verify req.session.passport',
-        req.session.passport
-      );
       let id = req.session.passport.user;
       ModelUser.findById(id).then((user) => {
         if (!user) res.locals = { isLoggedIn: false };
@@ -31,10 +16,6 @@ userController.verify = (req, res, next) => {
       });
     } else {
       //passport has not been set up yet
-      console.log(
-        'userController.verify req.session.passport.user is undefined',
-        req.session.passport
-      );
       res.locals = { isLoggedIn: false };
       return next();
     }
@@ -43,6 +24,20 @@ userController.verify = (req, res, next) => {
       log: `Error in middleware userController.verifyUser: ${err}`
     });
   }
+};
+
+userController.getIngredients = (req, res, next) => {
+  console.log('inside GET INGREDIENTS');
+  console.log('req.session in userCont.getIngred', req.session)
+  // let id = req.session.passport.user;
+  ModelUser.findById('5e9672ca8687611204c9b017', (err, user) => {
+    if (err) {
+      console.log(err);
+    }
+    res.locals.ingredients = user.ingredients;
+    console.log(res.locals.ingredients);
+    return next();
+  });
 };
 
 userController.postUser = (req, res, next) => {
@@ -66,6 +61,8 @@ userController.getItems = (req, res, next) => {
 };
 
 userController.getRecipes = (req, res, next) => {
+  console.log('userCot.getRecipes req.session.passport', req.session.passport)
+
   ModelUser.findById('5e9672ca8687611204c9b017', (err, user) => {
     console.log(user);
     if (err) {
@@ -79,6 +76,7 @@ userController.getRecipes = (req, res, next) => {
 userController.postIngredient = (req, res, next) => {
   const { ingredient } = req.body;
   // console.log(ingredient);
+  console.log('userCot.postIngred req.session.passport', req.session.passport)
   ModelUser.findOneAndUpdate(
     { _id: '5e9672ca8687611204c9b017' },
     { $push: { ingredients: ingredient } },
@@ -92,6 +90,8 @@ userController.postIngredient = (req, res, next) => {
 };
 
 userController.postRecipe = (req, res, next) => {
+  console.log('userCot.postRecipe req.session.passport', req.session.passport)
+
   //you can add more options inside for example calories, time
   const { recipeName, recipeUrl } = req.body;
   const newRecipe = { recipeName, recipeUrl };

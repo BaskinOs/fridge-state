@@ -41,45 +41,26 @@ class MainContainer extends Component {
     // console.log('MainCotainer isLoggedIn', isLoggedIn);
 
     let component;
-    if (!isLoggedIn) {
+    if (!isLoggedIn) { //not logged in
       component = (
-        // <BrowserRouter>
-        // <Route path="/" exact component={Landing} />
         <p>Please log in to use the app</p>
-        // </BrowserRouter>
       );
-    } else component = <p>Logged In!</p>;
-    // console.log(this.props);
-
-    const {
-      updateIngredient,
-      postIngredient,
-      deleteIngredient,
-      ingredientInput,
-      getIngredients,
-      ingredientsList
-    } = this.props;
-    return (
-      <BrowserRouter>
-        <div className="MainContainer">Main Container</div>
-        <Route path="/" exact component={Landing} />
-
-        {/*to check status of user login*/}
-        {component}
-
+    } else component = ( //logged in - render different routes
+      <React.Fragment>
+        <p>Logged In!</p>
         <Route
-          path="/fridge"
-          render={(routeProps) => (
-            <Fridge
-              {...routeProps}
-              updateIngredient={updateIngredient}
-              postIngredient={postIngredient}
-              deleteIngredient={deleteIngredient}
-              ingredientInput={ingredientInput}
-              ingredientsList={ingredientsList}
-            />
-          )}
-          isAuthed={true}
+        path="/fridge"
+        render={(routeProps) => (
+          <Fridge
+            {...routeProps}
+            updateIngredient={updateIngredient}
+            postIngredient={postIngredient}
+            deleteIngredient={deleteIngredient}
+            ingredientInput={ingredientInput}
+            ingredientsList={ingredientsList}
+          />
+        )}
+        isAuthed={true}
         />
         <Route
           path="/ingredients"
@@ -96,7 +77,24 @@ class MainContainer extends Component {
             <Dashboard {...routeProps} getIngredients={getIngredients} />
           )}
           isAuthed={true}
-        />
+        />        
+      </React.Fragment>
+    );
+
+    const {
+      updateIngredient,
+      postIngredient,
+      deleteIngredient,
+      ingredientInput,
+      getIngredients,
+      ingredientsList
+    } = this.props;
+    return (
+      <BrowserRouter>
+        <div className="MainContainer">Main Container</div>
+        <Route path="/" exact component={Landing} />
+        {/*render component based on state of user login*/}
+        {component}
       </BrowserRouter>
     );
   }
