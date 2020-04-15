@@ -6,7 +6,6 @@ export const verifyLogin = () => (dispatch) =>
   axios
     .get("/auth/verify")
     .then(({ data }) => {
-      console.log('data from userActions verifyLogin', data);
       console.log('userActions verifyLogin data.isLoggedIn', data.isLoggedIn);
       if (!data.isLoggedIn) {
         console.log('userActions verifyLogin USER_LOGOUT dispatched');

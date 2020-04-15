@@ -5,14 +5,21 @@ const userController = {};
 //controller to verify user login
 userController.verify = (req, res, next) => {
   try {
-    //use userId in req.session to verify user
-    console.log('userController.verify req.session.passport', req.session.passport);
-    let id = req.session.passport.user;
-    ModelUser.findById(id).then((user) => {
-      if(!user) res.locals = { isLoggedIn: false };
-      else res.locals = { isLoggedIn: true };
+    //use userId in req.session.user to verify user
+    if (req.session.passport.user) {
+      console.log('userController.verify req.session.passport', req.session.passport);
+      let id = req.session.passport.user;
+      ModelUser.findById(id).then((user) => {
+        if(!user) res.locals = { isLoggedIn: false };
+        else res.locals = { isLoggedIn: true };
+        return next();
+      })
+    }
+    else { //passport has not been set up yet
+      console.log('userController.verify req.session.passport.user is undefined', req.session.passport);
+      res.locals = { isLoggedIn: false };
       return next();
-    })
+    }
   } catch (err) {
     return next({
       log: `Error in middleware userController.verifyUser: ${err}`,

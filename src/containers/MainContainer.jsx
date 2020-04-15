@@ -16,7 +16,8 @@ import Dashboard from './Dashboard';
 import * as userActions from "../actions/userActions";
 
 const mapStateToProps = (state) => ({
-  ingredientInput: state.ingredient.ingredientInput
+  ingredientInput: state.ingredient.ingredientInput,
+  isLoggedIn: state.user.isLoggedIn,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -36,10 +37,10 @@ class MainContainer extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props;
-    let component;
-
+    const isLoggedIn  = this.props.isLoggedIn;
     console.log('MainCotainer isLoggedIn', isLoggedIn);
+
+    let component;
     if (!isLoggedIn) {
       component =  (
         // <BrowserRouter>
