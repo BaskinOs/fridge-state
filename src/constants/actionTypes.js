@@ -1,3 +1,9 @@
-
-export const USER_LOGIN = "USER_LOGIN";
-export const USER_LOGOUT = "USER_LOGOUT";
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGOUT = 'USER_LOGOUT';
+export const GET_USER = 'GET_USER';
+export const ADD_USER = 'ADD_USER';
+export const POST_INGREDIENT = 'POST_INGREDIENT';
+export const GET_INGREDIENTS = 'GET_INGREDIENTS';
+export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
+export const ADD_RECIPE = 'ADD_RECIPE';
+export const UPDATE_INGREDIENT = 'UPDATE_INGREDIENT';
