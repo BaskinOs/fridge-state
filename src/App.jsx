@@ -4,11 +4,12 @@ import styles from './styles/styles.scss';
 
 import MainContainer from './containers/MainContainer';
 
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>FridgeStates</h1>
+        <h1>FridgeState</h1>
         <MainContainer />
       </div>
     );
