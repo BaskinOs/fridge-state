@@ -13,9 +13,11 @@ import Ingredients from './Ingredients';
 import Recipes from './Recipes';
 import Instructions from './Instructions';
 import Dashboard from './Dashboard';
+import axios from 'axios';
 
 const mapStateToProps = (state) => ({
-  ingredientInput: state.ingredient.ingredientInput
+  ingredientInput: state.ingredient.ingredientInput,
+  ingredients: state.ingredient.ingredients
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -26,9 +28,77 @@ class MainContainer extends Component {
     super(props);
   }
 
+  componentDidMount() {}
+
+  recipeQuery() {
+    let apiString =
+      'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=';
+
+    apiString += `${numOfRecipe}`;
+    apiString += `&ranking=1&ignorePantry=false&ingredients=`;
+
+    if (ingredOne.length > 0) {
+      apiString += `${ingredOne}`;
+    }
+    if (ingredTwo.length > 0) {
+      apiString += `,${ingredTwo}`;
+    }
+    if (ingredThree.length > 0) {
+      apiString += `,${ingredThree}`;
+    }
+    if (ingredFour.length > 0) {
+      apiString += `,${ingredFour}`;
+    }
+    if (ingredFive.length > 0) {
+      apiString += `,${ingredFive}`;
+    }
+
+    const recipeOptions = {
+      url: apiString,
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host':
+          'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+        'x-rapidapi-key': process.env.API_APP_KEY
+      }
+    };
+
+    axios(recipeOptions)
+      .then((response) => {
+        console.log(response, 'this is the response');
+      })
+      .catch((err) =>
+        console.log(`Error in recipe options fetch: ERR: ${err}`)
+      );
+  }
+
+  instructionQuery(e) {
+    let apiString = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/`;
+
+    apiString += `${recipe_id}/`;
+    apiString += `information`;
+
+    const instrOptions = {
+      url: apiString,
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host':
+          'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+        'x-rapidapi-key': process.env.API_APP_KEY
+      }
+    };
+
+    axios(instrOptions)
+      .then((response) => {
+        console.log(response, 'this is response');
+      })
+      .catch((err) => console.log(`Error in instruction fetch: ERR: ${err}`));
+  }
+
   render() {
-    console.log(this.props, 'This is PROPS');
+    // console.log(this.props, 'This is PROPS');
     const {
+      ingredients,
       updateIngredient, // reducer
       postIngredient, // reducer "newIngredient"
       deleteIngredient,
@@ -53,7 +123,13 @@ class MainContainer extends Component {
         />
         <Route
           path="/ingredients"
-          render={(props) => <Ingredients {...props} />}
+          render={(props) => (
+            <Ingredients
+              {...props}
+              ingredients={ingredients}
+              recipeQuery={this.recipeQuery}
+            />
+          )}
         />
         <Route path="/recipes" render={(props) => <Recipes {...props} />} />
         <Route
@@ -67,3 +143,92 @@ class MainContainer extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
+
+// RECIPE SEARCH RESPONSE BODY
+// res.data = array of objects contaning different recipes
+// res.data[index].id = recipe's id which will be submitted into Recipe instruction query
+// res.data[index].title = name of recipe
+// red.data[index].image = picture of recipe
+
+// INSTRUCTION RESPONSE BODY
+// res.data.extendedIngredients = array of objects containing ingredients
+// res.data.readyInMinutes = Number
+// res.data.image = image
+// res.data.title = title
+// res.data.summary = summary of recipe
+// res.data.istructions = recipe instructions (may be null)
+
+// fetch(
+//   'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=1&ranking=1&ignorePantry=true&ingredients=apples,flour,sugar',
+//   {
+//     method: 'GET',
+//     headers: {
+//       'x-rapidapi-host':
+//         'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+//       'x-rapidapi-key': '573c26c799msh27b6667d63bc248p16cd7bjsnb8a840afd3f5'
+//     }
+//   }
+// )
+//   .then((res) => res.json())
+//   .then((data) => {
+//     console.log(data, 'This is the recipe name');
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+// fetch(
+//   'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/48191/information',
+//   {
+//     method: 'GET',
+//     headers: {
+//       'x-rapidapi-host':
+//         'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+//       'x-rapidapi-key': '573c26c799msh27b6667d63bc248p16cd7bjsnb8a840afd3f5'
+//     }
+//   }
+// )
+//   .then((res) => res.json())
+//   .then((data) => {
+//     console.log(data, 'These are the Instructions');
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+// fetch(
+//   `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=${numOfRes}&ranking=1&ignorePantry=false&ingredients=apples%252Cflour%252Csugar`,
+//   {
+//     method: 'GET',
+//     headers: {
+//       'x-rapidapi-host':
+//         'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+//       'x-rapidapi-key': '573c26c799msh27b6667d63bc248p16cd7bjsnb8a840afd3f5'
+//     }
+//   }
+// )
+//   .then((res) => res.json())
+//   .then((data) => {
+//     console.log(data);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+// fetch(
+//   `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/information`,
+//   {
+//     method: 'GET',
+//     headers: {
+//       'x-rapidapi-host':
+//         'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+//       'x-rapidapi-key': '573c26c799msh27b6667d63bc248p16cd7bjsnb8a840afd3f5'
+//     }
+//   }
+// )
+//   .then((res) => res.json())
+//   .then((data) => {
+//     console.log(data);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });

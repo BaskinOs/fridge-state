@@ -1,7 +1,7 @@
 import * as types from '../constants/actionTypes';
 
 const ingredientState = {
-  ingredients: [],
+  ingredients: ['onions', 'tomatoes', 'chicken', 'pasta', 'garlic'],
   ingredientInput: ''
 };
 
