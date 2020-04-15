@@ -29,11 +29,9 @@ class MainContainer extends Component {
 
   componentDidMount() {
     console.log('componentDidMount');
-    // this.props.verifyLogin();
   }
 
   componentWillUnmount() {
-    // clearInterval(this.interval);
     console.log('componentWillUnmount');
   }
 
@@ -41,7 +39,7 @@ class MainContainer extends Component {
     const { isLoggedIn } = this.props;
     let component;
 
-    console.log('isLoggedIn', isLoggedIn);
+    console.log('MainCotainer isLoggedIn', isLoggedIn);
     if (!isLoggedIn) {
       component =  (
         // <BrowserRouter>
@@ -66,7 +64,7 @@ class MainContainer extends Component {
 
         {/*to check status of user login*/}
         {component}
-        
+
         <Route
           path="/fridge"
           render={(routeProps) => (
