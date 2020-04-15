@@ -9,7 +9,8 @@ const authRouter = express.Router();
 authRouter.get('/logout', (req, res) => {
   console.log('in /logout');
   //handle with passport
-  res.send('loggin out')
+  req.logout();
+  res.redirect('/');
 })
 
 //checks if user is logged in

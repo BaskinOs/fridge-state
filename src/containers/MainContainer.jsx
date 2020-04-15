@@ -16,7 +16,8 @@ import Dashboard from './Dashboard';
 import * as userActions from "../actions/userActions";
 
 const mapStateToProps = (state) => ({
-  ingredientInput: state.ingredient.ingredientInput
+  ingredientInput: state.ingredient.ingredientInput,
+  isLoggedIn: state.user.isLoggedIn,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -29,27 +30,28 @@ class MainContainer extends Component {
 
   componentDidMount() {
     console.log('componentDidMount');
-    // this.props.verifyLogin();
   }
 
   componentWillUnmount() {
-    // clearInterval(this.interval);
     console.log('componentWillUnmount');
   }
 
   render() {
-    // const { isLoggedIn } = this.props;
-    // console.log('isLoggedIn', isLoggedIn);
-    // if (!isLoggedIn) {
-    //   return (
-    //     <BrowserRouter>
-    //     <Route path="/" exact component={Landing} />
-    //     <p>Please log in to use the app</p>
-    //   </BrowserRouter>
-    //   )
-    // }
-    // else return (
+    const isLoggedIn  = this.props.isLoggedIn;
+    console.log('MainCotainer isLoggedIn', isLoggedIn);
+
+    let component;
+    if (!isLoggedIn) {
+      component =  (
+        // <BrowserRouter>
+        // <Route path="/" exact component={Landing} />
+        <p>Please log in to use the app</p>
+        // </BrowserRouter>
+      )
+    }
+    else component = ( <p>Logged In!</p> )
     console.log(this.props);
+
     const {
       updateIngredient,
       postIngredient,
@@ -59,8 +61,11 @@ class MainContainer extends Component {
     return (
       <BrowserRouter>
         <div className="MainContainer">Main Container</div>
-        <p>Logged In!</p>
         <Route path="/" exact component={Landing} />
+
+        {/*to check status of user login*/}
+        {component}
+
         <Route
           path="/fridge"
           render={(routeProps) => (
