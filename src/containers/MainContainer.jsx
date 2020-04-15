@@ -13,11 +13,10 @@ import Ingredients from './Ingredients';
 import Recipes from './Recipes';
 import Instructions from './Instructions';
 import Dashboard from './Dashboard';
-import * as userActions from "../actions/userActions";
 
 const mapStateToProps = (state) => ({
   ingredientInput: state.ingredient.ingredientInput,
-  isLoggedIn: state.user.isLoggedIn,
+  isLoggedIn: state.user.isLoggedIn
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -29,34 +28,36 @@ class MainContainer extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
+    // console.log('componentDidMount');
+    this.props.getIngredients();
   }
 
   componentWillUnmount() {
-    console.log('componentWillUnmount');
+    // console.log('componentWillUnmount');
   }
 
   render() {
-    const isLoggedIn  = this.props.isLoggedIn;
-    console.log('MainCotainer isLoggedIn', isLoggedIn);
+    const isLoggedIn = this.props.isLoggedIn;
+    // console.log('MainCotainer isLoggedIn', isLoggedIn);
 
     let component;
     if (!isLoggedIn) {
-      component =  (
+      component = (
         // <BrowserRouter>
         // <Route path="/" exact component={Landing} />
         <p>Please log in to use the app</p>
         // </BrowserRouter>
-      )
-    }
-    else component = ( <p>Logged In!</p> )
-    console.log(this.props);
+      );
+    } else component = <p>Logged In!</p>;
+    // console.log(this.props);
 
     const {
       updateIngredient,
       postIngredient,
       deleteIngredient,
-      ingredientInput
+      ingredientInput,
+      getIngredients,
+      ingredientsList
     } = this.props;
     return (
       <BrowserRouter>
@@ -75,6 +76,7 @@ class MainContainer extends Component {
               postIngredient={postIngredient}
               deleteIngredient={deleteIngredient}
               ingredientInput={ingredientInput}
+              ingredientsList={ingredientsList}
             />
           )}
           isAuthed={true}
@@ -88,7 +90,13 @@ class MainContainer extends Component {
           path="/instructions"
           render={(props) => <Instructions {...props} />}
         />
-        <Route path="/dashboard" render={(props) => <Dashboard {...props} />} />
+        <Route
+          path="/dashboard"
+          render={(routeProps) => (
+            <Dashboard {...routeProps} getIngredients={getIngredients} />
+          )}
+          isAuthed={true}
+        />
       </BrowserRouter>
     );
   }

@@ -4,17 +4,17 @@ import * as types from '../constants/actionTypes';
 
 export const verifyLogin = () => (dispatch) =>
   axios
-    .get("/auth/verify")
+    .get('/auth/verify')
     .then(({ data }) => {
-      console.log('userActions verifyLogin data.isLoggedIn', data.isLoggedIn);
+      // console.log('data from userActions verifyLogin', data);
       if (!data.isLoggedIn) {
-        console.log('userActions verifyLogin USER_LOGOUT dispatched');
+        // console.log('userActions verifyLogin USER_LOGOUT dispatched');
         return dispatch({
           type: types.USER_LOGOUT,
           payload: data
         });
       } else {
-        console.log('userActions verifyLogin USER_LOGIN dispatched');
+        // console.log('userActions verifyLogin USER_LOGIN dispatched');
         return dispatch({
           type: types.USER_LOGIN,
           payload: data
