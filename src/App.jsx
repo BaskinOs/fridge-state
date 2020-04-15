@@ -4,13 +4,13 @@ import styles from './styles/styles.scss';
 
 import MainContainer from './containers/MainContainer';
 
-import Login from "./components/Login.jsx";
+import Login from './components/Login.jsx';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>FridgeStates</h1>
+        <h1>FridgeState</h1>
         <MainContainer />
       </div>
     );
