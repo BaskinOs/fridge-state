@@ -10,8 +10,9 @@ userController.verify = (req, res, next) => {
     if (req.session.passport.user) {
       let id = req.session.passport.user;
       ModelUser.findById(id).then((user) => {
+        // console.log(user);
         if (!user) res.locals = { isLoggedIn: false };
-        else res.locals = { isLoggedIn: true };
+        else res.locals = { isLoggedIn: true, user: user };
         return next();
       });
     } else {
@@ -27,8 +28,9 @@ userController.verify = (req, res, next) => {
 };
 
 userController.getIngredients = (req, res, next) => {
-  console.log('userCont.getIngred req.session.passport', req.session.passport)
-  if (req.session.passport.user) { //passport must be valid
+  console.log('userCont.getIngred req.session.passport', req.session.passport);
+  if (req.session.passport.user) {
+    //passport must be valid
     let id = req.session.passport.user;
     ModelUser.findById(id, (err, user) => {
       if (err) {
@@ -62,7 +64,7 @@ userController.getItems = (req, res, next) => {
 };
 
 userController.getRecipes = (req, res, next) => {
-  console.log('userCont.getRecipes req.session.passport', req.session.passport)
+  console.log('userCont.getRecipes req.session.passport', req.session.passport);
   if (req.session.passport.user) {
     let id = req.session.passport.user;
     ModelUser.findById(id, (err, user) => {
@@ -86,16 +88,16 @@ userController.postIngredient = (req, res, next) => {
       { $push: { ingredients: ingredient } },
       { new: true }
     )
-    .then((user) => {
-      res.locals.ingredients = user.ingredients;
-      return next();
-    })
-    .catch((err) => console.log(err));
+      .then((user) => {
+        res.locals.ingredients = user.ingredients;
+        return next();
+      })
+      .catch((err) => console.log(err));
   }
 };
 
 userController.postRecipe = (req, res, next) => {
-  console.log('userCont.postRecipe req.session.passport', req.session.passport)
+  console.log('userCont.postRecipe req.session.passport', req.session.passport);
   if (req.session.passport.user) {
     let id = req.session.passport.user;
 
@@ -108,11 +110,11 @@ userController.postRecipe = (req, res, next) => {
       { $push: { savedRecipes: newRecipe } },
       { new: true }
     )
-    .then((user) => {
-      res.locals.savedRecipes = user.savedRecipes;
-      return next();
-    })
-    .catch((err) => console.log(err));
+      .then((user) => {
+        res.locals.savedRecipes = user.savedRecipes;
+        return next();
+      })
+      .catch((err) => console.log(err));
   }
 };
 

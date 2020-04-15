@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 
 const mapStateToProps = (state) => ({
   ingredientsList: state.ingredient.ingredients
@@ -12,6 +13,7 @@ const FridgeState = (props) => {
     return (
       <div key={`ingred${index}`}>
         <li>{item}</li>
+        {/* <Button onClick={props.deleteIngredient()}>Pick Ingredients</Button> */}
       </div>
     );
   });

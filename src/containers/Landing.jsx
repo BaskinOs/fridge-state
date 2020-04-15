@@ -15,7 +15,7 @@ const Landing = (props) => {
           Logout
         </button>
       </form> */}
-      <Button href="/fridge">Move to Fridge</Button>
+      {/* <Button href="/fridge">Move to Fridge</Button> */}
     </div>
   );
 };
