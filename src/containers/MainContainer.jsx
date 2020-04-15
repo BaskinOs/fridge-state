@@ -27,12 +27,12 @@ class MainContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.props, 'This is PROPS');
     const {
-      updateIngredient,
-      postIngredient,
+      updateIngredient, // reducer
+      postIngredient, // reducer "newIngredient"
       deleteIngredient,
-      ingredientInput
+      ingredientInput // Ingredient State
     } = this.props;
     return (
       <BrowserRouter>
