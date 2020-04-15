@@ -9,6 +9,8 @@ import fridgeReducer from "./fridgeReducer";
 const reducers = combineReducers({
   // if we had other reducers, they would go here
   user: userReducer,
+  // recipe: recipeReducer,
+  // fridge: fridgeReducer,
 });
 
 // make the combined reducers available for import
