@@ -4,7 +4,6 @@ import styles from './styles/styles.scss';
 
 import MainContainer from './containers/MainContainer';
 
-import Login from './components/Login.jsx';
 
 class App extends Component {
   render() {
