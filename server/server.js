@@ -2,6 +2,8 @@ require("dotenv").config(); //dotenv configuration should be in line 1
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
 
 //import routes
 const authRouter = require("./routes/auth");
@@ -18,12 +20,18 @@ app.use("/api", apiRouter);
 
 // app.use(passport.initialize());
 
+//encrypt cookie, age = day
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000, // 1 day
+  keys: [process.env.COOKIE_KEY]
+}))
+
+//initialize passport
+app.use(passport.initialize());
+app.use(passport.session()); 
+
 //Route handlers
 app.use("/auth", authRouter);
-// app.use('/api', (req, res) => {
-//   console.log('in api');
-//   res.send('hello');
-// })
 
 // handle static files
 app.use("/dist", express.static(path.join(__dirname, "../dist")));
