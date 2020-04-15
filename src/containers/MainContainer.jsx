@@ -38,18 +38,21 @@ class MainContainer extends Component {
   }
 
   render() {
-    // const { isLoggedIn } = this.props;
-    // console.log('isLoggedIn', isLoggedIn);
-    // if (!isLoggedIn) {
-    //   return (
-    //     <BrowserRouter>
-    //     <Route path="/" exact component={Landing} />
-    //     <p>Please log in to use the app</p>
-    //   </BrowserRouter>
-    //   )
-    // }
-    // else return (
+    const { isLoggedIn } = this.props;
+    let component;
+
+    console.log('isLoggedIn', isLoggedIn);
+    if (!isLoggedIn) {
+      component =  (
+        // <BrowserRouter>
+        // <Route path="/" exact component={Landing} />
+        <p>Please log in to use the app</p>
+        // </BrowserRouter>
+      )
+    }
+    else component = ( <p>Logged In!</p> )
     console.log(this.props);
+
     const {
       updateIngredient,
       postIngredient,
@@ -59,8 +62,11 @@ class MainContainer extends Component {
     return (
       <BrowserRouter>
         <div className="MainContainer">Main Container</div>
-        <p>Logged In!</p>
         <Route path="/" exact component={Landing} />
+
+        {/*to check status of user login*/}
+        {component}
+        
         <Route
           path="/fridge"
           render={(routeProps) => (
