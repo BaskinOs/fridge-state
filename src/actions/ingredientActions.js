@@ -35,7 +35,7 @@ export const getIngredients = () => (dispatch, getState) => {
       //     payload: data
       //   });
       // } else {
-      console.log('Get Ingredients DATA', data);
+      // console.log('Get Ingredients DATA', data);
       dispatch({
         type: types.GET_INGREDIENTS,
         payload: data

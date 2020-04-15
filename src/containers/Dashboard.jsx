@@ -12,7 +12,11 @@ const Dashboard = (props) => {
       <FridgeState />
       <Button href="/fridge">Edit My Fridge</Button>
       <br />
-      <Button href="/">Logout</Button>
+      <form id="logout-form" method="GET" action="/auth/logout">
+        <button className="loginBtn" id="loginBtn" type="submit">
+          Logout
+        </button>
+      </form>
     </div>
   );
 };
