@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 //import routes
 const authRouter = require("./routes/auth");
 const passportSetup = require("../config/passport-setup");
-// const apiRouter = require("./routes/api");
+const apiRouter = require("./routes/api");
 // import { initialiseAuthentication } from "./auth";
 
 const app = express();
@@ -14,15 +14,16 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(cookieParser());
+app.use("/api", apiRouter);
+
 // app.use(passport.initialize());
 
 //Route handlers
-// app.use("/api", apiRouter);
 app.use("/auth", authRouter);
-app.use('/api', (req, res) => {
-  console.log('in api');
-  res.send('hello');
-})
+// app.use('/api', (req, res) => {
+//   console.log('in api');
+//   res.send('hello');
+// })
 
 // handle static files
 app.use("/dist", express.static(path.join(__dirname, "../dist")));
@@ -37,6 +38,8 @@ if (process.env.NODE_ENV === 'production') {
     res.status(200).sendFile(path.join(__dirname, '../public/index.html'));
   });
 }
+
+//app.use("/api", apiRouter);
 
 // catch-all for unknown routes
 app.use((req, res) => res.sendStatus(404));
@@ -55,6 +58,6 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(
-    `Server is listening on port: ${`http://localhost:${PORT}/`}...!!!!!! `
+    `Server is listening on port: ${`http://localhost:${PORT}/`}...!`
   );
 });
