@@ -7,6 +7,7 @@ mongoose
   .connect(myURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false
   })
   .then(() => console.log('Connected'))
   .catch(err => console.log(err));
@@ -14,10 +15,8 @@ mongoose
 const User = new Schema({
   providerId: String,
   userName: String,
-  recipeName: String,
-  url: String,
-  savedRecipes: [], //----
-  ingredients: [String], //--
+  savedRecipes: [], 
+  ingredients: [String], 
 });
 
 const ModelUser = mongoose.model('user', User);
