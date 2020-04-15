@@ -27,17 +27,18 @@ userController.verify = (req, res, next) => {
 };
 
 userController.getIngredients = (req, res, next) => {
-  console.log('inside GET INGREDIENTS');
-  console.log('req.session in userCont.getIngred', req.session)
-  // let id = req.session.passport.user;
-  ModelUser.findById('5e9672ca8687611204c9b017', (err, user) => {
-    if (err) {
-      console.log(err);
-    }
-    res.locals.ingredients = user.ingredients;
-    console.log(res.locals.ingredients);
-    return next();
-  });
+  console.log('userCont.getIngred req.session.passport', req.session.passport)
+  if (req.session.passport.user) { //passport must be valid
+    let id = req.session.passport.user;
+    ModelUser.findById(id, (err, user) => {
+      if (err) {
+        console.log(err);
+      }
+      res.locals.ingredients = user.ingredients;
+      console.log(res.locals.ingredients);
+      return next();
+    });
+  }
 };
 
 userController.postUser = (req, res, next) => {
@@ -61,51 +62,58 @@ userController.getItems = (req, res, next) => {
 };
 
 userController.getRecipes = (req, res, next) => {
-  console.log('userCot.getRecipes req.session.passport', req.session.passport)
-
-  ModelUser.findById('5e9672ca8687611204c9b017', (err, user) => {
-    console.log(user);
-    if (err) {
-      return next(err);
-    }
-    res.locals.savedRecipes = user.savedRecipes;
-    return next();
-  });
+  console.log('userCont.getRecipes req.session.passport', req.session.passport)
+  if (req.session.passport.user) {
+    let id = req.session.passport.user;
+    ModelUser.findById(id, (err, user) => {
+      console.log(user);
+      if (err) {
+        return next(err);
+      }
+      res.locals.savedRecipes = user.savedRecipes;
+      return next();
+    });
+  }
 };
 
 userController.postIngredient = (req, res, next) => {
   const { ingredient } = req.body;
   // console.log(ingredient);
-  console.log('userCot.postIngred req.session.passport', req.session.passport)
-  ModelUser.findOneAndUpdate(
-    { _id: '5e9672ca8687611204c9b017' },
-    { $push: { ingredients: ingredient } },
-    { new: true }
-  )
+  if (req.session.passport.user) {
+    let id = req.session.passport.user;
+    ModelUser.findOneAndUpdate(
+      { _id: id },
+      { $push: { ingredients: ingredient } },
+      { new: true }
+    )
     .then((user) => {
       res.locals.ingredients = user.ingredients;
       return next();
     })
     .catch((err) => console.log(err));
+  }
 };
 
 userController.postRecipe = (req, res, next) => {
-  console.log('userCot.postRecipe req.session.passport', req.session.passport)
+  console.log('userCont.postRecipe req.session.passport', req.session.passport)
+  if (req.session.passport.user) {
+    let id = req.session.passport.user;
 
-  //you can add more options inside for example calories, time
-  const { recipeName, recipeUrl } = req.body;
-  const newRecipe = { recipeName, recipeUrl };
-  //id needs to be replaced dSer userId
-  ModelUser.findOneAndUpdate(
-    { _id: '5e9672ca8687611204c9b017' },
-    { $push: { savedRecipes: newRecipe } },
-    { new: true }
-  )
+    //you can add more options inside for example calories, time
+    const { recipeName, recipeUrl } = req.body;
+    const newRecipe = { recipeName, recipeUrl };
+    //id needs to be replaced dSer userId
+    ModelUser.findOneAndUpdate(
+      { _id: id },
+      { $push: { savedRecipes: newRecipe } },
+      { new: true }
+    )
     .then((user) => {
       res.locals.savedRecipes = user.savedRecipes;
       return next();
     })
     .catch((err) => console.log(err));
+  }
 };
 
 module.exports = userController;
