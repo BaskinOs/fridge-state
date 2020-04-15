@@ -6,6 +6,8 @@ const Recipes = (props) => {
     <div className="Recipes">
       <h2>We are in Recipes</h2>
       <Button href="/instructions">Go to Instructions</Button>
+      <br />
+      <Button href="/dashboard">Back to Dashboard</Button>
     </div>
   );
 };
