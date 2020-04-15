@@ -5,7 +5,8 @@ const Ingredients = (props) => {
   return (
     <div className="Ingredients">
       <h2>We are in Ingredients</h2>
-      <Button href="/recipes">Go to Recipes</Button>
+      <Button href="/recipes">Show me the Recipes</Button> <br />
+      <Button href="/dashboard">Back to Dashboard</Button>
     </div>
   );
 };
