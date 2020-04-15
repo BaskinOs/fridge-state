@@ -32,6 +32,8 @@ class MainContainer extends Component {
     // console.log(this.props, 'This is PROPS');
     const {
       ingredients,
+      getRecipes,
+      getInstructions,
       updateIngredient, // reducer
       postIngredient, // reducer "newIngredient"
       deleteIngredient,
@@ -60,11 +62,16 @@ class MainContainer extends Component {
             <Ingredients
               {...props}
               ingredients={ingredients}
-              recipeQuery={this.recipeQuery}
+              getRecipes={getRecipes}
             />
           )}
         />
-        <Route path="/recipes" render={(props) => <Recipes {...props} />} />
+        <Route
+          path="/recipes"
+          render={(props) => (
+            <Recipes {...props} instructions={getInstructions} />
+          )}
+        />
         <Route
           path="/instructions"
           render={(props) => <Instructions {...props} />}
