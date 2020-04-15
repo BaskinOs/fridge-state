@@ -40,7 +40,7 @@ userController.postUser = (req, res, next) => {
   });
 }
 
-userController.getItems = (req, res, next) => {
+userController.getIngredients = (req, res, next) => {
   ModelUser.find({}, (err, foundItems) => {
     if (err) {
       return next(err);
@@ -71,6 +71,17 @@ userController.postIngredient = (req, res, next) => {
   })
   .catch(err => console.log(err))
 };
+
+userController.deleteIngredient = (req, res, next) => {
+  const { ingredientToDelete } = req.body
+  ModelUser.updateOne({_id:"5e9672ca8687611204c9b017"}, { "$pull": { "ingredients":ingredientToDelete}},(err, foundIngredient) => {   
+    if (err) {
+      return next(err);
+    }
+    return next();
+  });
+}
+
 
 userController.postRecipe = (req, res, next) => {
     //you can add more options inside for example calories, time
