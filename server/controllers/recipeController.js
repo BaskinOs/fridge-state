@@ -27,10 +27,10 @@ recipeController.getRecipes = (req, res, next) => {
 };
 
 recipeController.getIntructions = (req, res, next) => {
-  // const { recipe_id } = req.body;
+  const { recipe_id } = req.body;
 
   fetch(
-    'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/48191/information',
+    `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/information`,
     {
       method: 'GET',
       headers: {
