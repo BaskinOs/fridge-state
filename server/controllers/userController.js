@@ -10,8 +10,10 @@ userController.verify = (req, res, next) => {
     if (req.session.passport.user) {
       let id = req.session.passport.user;
       ModelUser.findById(id).then((user) => {
+        // console.log(user);
         if (!user) res.locals = { isLoggedIn: false };
-        else res.locals = { isLoggedIn: true };
+        // else res.locals = { isLoggedIn: true, user: user };
+        else res.locals = { isLoggedIn: true, user: user };
         return next();
       });
     } else {
@@ -27,7 +29,7 @@ userController.verify = (req, res, next) => {
 };
 
 userController.getIngredients = (req, res, next) => {
-  console.log('userCont.getIngred req.session.passport', req.session.passport)
+  // console.log('userCont.getIngred req.session.passport', req.session.passport)
  try {
    if (req.session.passport.user) { //passport must be valid
      let id = req.session.passport.user;
@@ -54,16 +56,6 @@ userController.postUser = (req, res, next) => {
     if (err) {
       console.log(err);
     }
-    return next();
-  });
-};
-
-userController.getItems = (req, res, next) => {
-  ModelUser.find({}, (err, foundItems) => {
-    if (err) {
-      return next(err);
-    }
-    res.locals.ingredients = user.ingredients;
     return next();
   });
 };
@@ -109,6 +101,29 @@ userController.postIngredient = (req, res, next) => {
   } catch (err) {
     return next({
       log: `Error in middleware userController.postIngredient: ${err}`
+    });
+  }
+};
+
+userController.deleteIngredient = (req, res, next) => {
+  try {
+    if (req.session.passport.user) {
+      let id = req.session.passport.user;
+      const { ingredientToDelete } = req.body;
+      ModelUser.updateOne(
+        { _id: id },
+        { $pull: { ingredients: ingredientToDelete } },
+        (err, foundIngredient) => {
+          if (err) {
+            return next(err);
+          }
+          return next();
+        }
+      );
+    }
+  } catch (err) {
+    return next({
+      log: `Error in middleware userController.deleteIngredient: ${err}`
     });
   }
 };

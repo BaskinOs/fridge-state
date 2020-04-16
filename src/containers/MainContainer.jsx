@@ -16,7 +16,9 @@ import Dashboard from './Dashboard';
 
 const mapStateToProps = (state) => ({
   ingredientInput: state.ingredient.ingredientInput,
-  isLoggedIn: state.user.isLoggedIn
+  isLoggedIn: state.user.isLoggedIn,
+  userName: state.user.userName,
+  profilePic: state.user.profilePic
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -48,6 +50,12 @@ class MainContainer extends Component {
     } else component = ( //logged in - render different routes
       <React.Fragment>
         <p>Logged In!</p>
+        <section className='profile'>
+          <div>
+            <img src={this.props.profilePic}/>
+            <p>Hello, {this.props.userName}!</p>
+          </div>
+        </section>
         <Route
         path="/fridge"
         render={(routeProps) => (

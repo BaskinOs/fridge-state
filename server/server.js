@@ -47,8 +47,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-//app.use("/api", apiRouter);
-
 // catch-all for unknown routes
 app.use((req, res) => res.sendStatus(404));
 
