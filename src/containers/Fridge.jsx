@@ -3,6 +3,7 @@ import { Button, Form, InputGroup, FormControl } from 'react-bootstrap';
 import FridgeState from '../components/FridgeState';
 
 const Fridge = (props) => {
+  console.log('inside fridge', props.deleteIngredient);
   return (
     <div className="Fridge">
       <h2>Fridge</h2>
@@ -41,8 +42,12 @@ const Fridge = (props) => {
         </Button>
       </Form>
       <FridgeState deleteIngredient={props.deleteIngredient} />
-      <Button id='pickIngBtn' href="/ingredients">Choose Ingredients</Button>
-      <Button id='backBtn' href="/dashboard">Dashboard</Button>
+      <Button id="pickIngBtn" href="/ingredients">
+        Choose Ingredients
+      </Button>
+      <Button id="backBtn" href="/dashboard">
+        Dashboard
+      </Button>
     </div>
   );
 };

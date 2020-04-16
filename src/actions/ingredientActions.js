@@ -45,24 +45,24 @@ export const getIngredients = () => (dispatch, getState) => {
     });
 };
 
-export const deleteIngredient = () => (dispatch, getState) =>
+export const deleteIngredient = (ingredient) => (dispatch, getState) =>
   axios
-    .delete('/api/ingredients', {
+    .put('/api/ingredient', {
       user_id: getState().user.userId,
-      ingredient
+      ingredient: ingredient
     })
     .then(({ data }) => {
-      if (!data.isLoggedIn) {
-        dispatch({
-          type: types.USER_LOGOUT,
-          payload: data
-        });
-      } else {
-        dispatch({
-          type: types.DELETE_INGREDIENT,
-          payload: data
-        });
-      }
+      // if (!data.isLoggedIn) {
+      //   dispatch({
+      //     type: types.USER_LOGOUT,
+      //     payload: data
+      //   });
+      // } else {
+      dispatch({
+        type: types.GET_INGREDIENTS,
+        payload: data
+      });
+      // }
     })
     .catch((err) => console.log(`ERR in deleteIngredient Action: ${err}`));
 

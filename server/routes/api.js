@@ -24,13 +24,18 @@ apiRouter.get('/recipes', userController.getRecipes, (req, res, next) => {
   res.status(200).json(res.locals.savedRecipes);
 });
 
-  apiRouter.put('/ingredient', userController.deleteIngredient, (req, res, next) => {
-    res.status(200)
-  })
+apiRouter.put(
+  '/ingredient',
+  userController.deleteIngredient,
+  userController.getIngredients,
+  (req, res, next) => {
+    res.status(200).json(res.locals.ingredients);
+  }
+);
 
-  // apiRouter.put('/recipe', userController.deleteRecipe, (req, res, next) => {
-  //   res.status(200)
-  // })
+// apiRouter.put('/recipe', userController.deleteRecipe, (req, res, next) => {
+//   res.status(200)
+// })
 
 apiRouter.post('/recipe', userController.postRecipe, (req, res, next) => {
   res.status(200).json(res.locals.savedRecipes);
