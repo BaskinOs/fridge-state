@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as IngredientActions from '../actions/ingredientActions';
 import * as UserActions from '../actions/userActions';
+import * as RecipeActions from '../actions/recipeAction';
 // import Wrapper from "./containers/Wrapper";
 
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -13,6 +14,7 @@ import Ingredients from './Ingredients';
 import Recipes from './Recipes';
 import Instructions from './Instructions';
 import Dashboard from './Dashboard';
+import axios from 'axios';
 
 const mapStateToProps = (state) => ({
   ingredientInput: state.ingredient.ingredientInput,
@@ -22,7 +24,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ ...IngredientActions, ...UserActions }, dispatch);
+  bindActionCreators(
+    { ...IngredientActions, ...UserActions, ...RecipeActions },
+    dispatch
+  );
 
 class MainContainer extends Component {
   constructor(props) {
@@ -108,3 +113,17 @@ class MainContainer extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
+
+// RECIPE SEARCH RESPONSE BODY
+// res.data = array of objects contaning different recipes
+// res.data[index].id = recipe's id which will be submitted into Recipe instruction query
+// res.data[index].title = name of recipe
+// red.data[index].image = picture of recipe
+
+// INSTRUCTION RESPONSE BODY
+// res.data.extendedIngredients = array of objects containing ingredients
+// res.data.readyInMinutes = Number
+// res.data.image = image
+// res.data.title = title
+// res.data.summary = summary of recipe
+// res.data.istructions = recipe instructions (may be null)

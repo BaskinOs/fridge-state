@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import PickIngredients from '../components/PickIngredients';
 
 const Ingredients = (props) => {
+  // props.getRecipes();
   return (
     <div className="Ingredients">
       <h2>We are in Ingredients</h2>
