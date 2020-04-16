@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import { hot } from 'react-hot-loader';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './styles/styles.scss';
 
 import MainContainer from './containers/MainContainer';

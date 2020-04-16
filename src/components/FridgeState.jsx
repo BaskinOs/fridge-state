@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Accordion, Card } from 'react-bootstrap';
 
 const mapStateToProps = (state) => ({
   ingredientsList: state.ingredient.ingredients
@@ -19,10 +19,24 @@ const FridgeState = (props) => {
   });
   return (
     <div className="fridgeState">
-      <h2>Fridge State</h2>
-      <div className="ingredientsList">
+      {/* <h2>My Fridge</h2> */}
+      {/* <div className="ingredientsList">
         <ul>{ingredients}</ul>
-      </div>
+      </div> */}
+      <Accordion defaultActiveKey="0">
+        <Card>
+          <Accordion.Toggle as={Card.Header} eventKey="0">
+            <h2>My Fridge</h2>
+          </Accordion.Toggle>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>
+              <div className="ingredientsList">
+                <ul>{ingredients}</ul>
+              </div>
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
     </div>
   );
 };

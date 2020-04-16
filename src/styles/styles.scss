@@ -1,3 +1,118 @@
+//font
+@import url('https://fonts.googleapis.com/css?family=Bungee|Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@300&family=Gravitas+One&family=Noto+Sans&family=Work+Sans&display=swap');
+$Raleway:'Raleway', sans-serif;
+$Bungee:'Bungee', cursive;
+$NotoSans:'Noto Sans', sans-serif;
+$WorkSans:'Work Sans', sans-serif;
+$Gravitas:'Gravitas One', cursive;
+$BioRhyme:'BioRhyme', serif;
+
+//colors
+$light: #c2dde6;
+$whitish: #f9ffff;
+$lightblue: #AED9E0;
+$navy: #3D405B;
+$cadet: #5E6472;
+$beige: #FAF3DD;
+$peachOrange: #F2CC8F;
+$green: #41c082;
+$softblue: #4885ed;
+$googleRed: #db3236;
+
+
 body {
-  background-color: grey;
+  background-color: $light;
+  font-family: $NotoSans;
+  color: $cadet;
+}
+
+h1 { //title
+  font-family: $BioRhyme;
+  color: $navy;
+  margin: 1em;
+  // -webkit-text-stroke: 1px $navy;
+}
+
+h2 {
+  font-family: $BioRhyme;
+  font-size: 1.5rem;
+  color: $navy;
+  // -webkit-text-stroke: 1px $whitish;
+
+}
+
+//buttons
+button {
+  border: none;
+  background-color: $green;
+  color: $whitish;
+  border-radius: 4px;
+  margin: 1em;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.loginBtn {
+  background-color: $googleRed;
+}
+.logoutBtn {
+  background-color: $cadet;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+//Landing
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+//Main Container
+.MainContainer {
+
+}
+
+//FridgeState
+.card {
+  background: rgba($color: #f9ffff, $alpha: 0.7);
+  background-image: url("https://cdn.clipart.email/58dd1c9ffac390819ca83c8a0d175811_refrigerator-black-and-white-transparent-png-clipart-free-_512-512.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+//Dashboard
+.Dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  .profile {
+    img {
+      border-radius: 50%;
+    }
+  }
+  
+  .fridgeState{
+    // position: absolute;
+    // bottom: 5rem;
+    // left: 38em;
+    // margin: 0;
+    // background-color: rgba($color: white, $alpha: 0.5);
+    // padding: 1em;
+    width: 15em;
+  }
+  #fridgeImg {
+    width: 500px;
+    opacity: 0.5;
+  }
+
 }

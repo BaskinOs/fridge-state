@@ -52,23 +52,45 @@ class MainContainer extends Component {
     // hasRecipes boolean
     // console.log('inside maincontainer', this.props.recipesList);
     const hasRecipes = this.props.recipesList.length > 0;
-    const isLoggedIn = this.props.isLoggedIn;
     // console.log('instructions!!!!!', this.props.instructions);
     const hasInstructions = this.props.summary.length > 0;
     // console.log('MainCotainer isLoggedIn', isLoggedIn);
     let component;
+    const {
+      updateIngredient,
+      postIngredient,
+      deleteIngredient,
+      ingredientInput,
+      getIngredients,
+      ingredientsList,
+      getRecipes,
+      profilePic,
+      userName,
+      isLoggedIn
+    } = this.props;
 
     if (!isLoggedIn) {
       //not logged in
 
-      component = <Landing />;
+      // component = <Landing />;
+      component = (
+      <div className='landing'>
+      <img src="http://getdrawings.com/free-icon-bw/food-icon-white-19.png" width='300'/>
+      <p>Welcome to FridgeState!</p>
+      <form id="login-form" method="GET" action="/auth/google">
+        <button className="loginBtn" id="loginBtn" type="submit">
+          Login with Google
+        </button>
+      </form>
+    </div>
+      )
     } else
       component = ( //logged in - render different routes
         <React.Fragment>
           <section className="profile">
             <div>
-              <img width="100" src={this.props.profilePic} />
-              <p>Hello, {this.props.userName}!</p>
+              <img width="100" src={profilePic} />
+              <p>Hello, {userName}!</p>
             </div>
           </section>
           <Route
@@ -99,7 +121,7 @@ class MainContainer extends Component {
           <Route
             path="/dashboard"
             render={(routeProps) => (
-              <Dashboard {...routeProps} getIngredients={getIngredients} />
+              <Dashboard {...routeProps} getIngredients={getIngredients} profilePic={profilePic} userName={userName}/>
             )}
             isAuthed={true}
           />
@@ -129,20 +151,12 @@ class MainContainer extends Component {
       );
     }
 
-    const {
-      updateIngredient,
-      postIngredient,
-      deleteIngredient,
-      ingredientInput,
-      getIngredients,
-      ingredientsList,
-      getRecipes
-    } = this.props;
+
     return (
       <BrowserRouter>
-        <div className="MainContainer">Main Container</div>
-        {/*render component based on state of user login*/}
-        {component}
+        <div className="MainContainer">
+          {component}
+        </div>
       </BrowserRouter>
     );
   }
