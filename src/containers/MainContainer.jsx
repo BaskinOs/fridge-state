@@ -145,7 +145,6 @@ class MainContainer extends Component {
       );
     }
 
-
     return (
       <BrowserRouter>
         <div className="MainContainer">
