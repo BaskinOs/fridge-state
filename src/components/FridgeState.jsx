@@ -1,21 +1,41 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Accordion, Card } from 'react-bootstrap';
+import { Accordion, Card, Button } from 'react-bootstrap';
+// import { bindActionCreators } from 'redux';
+// import * as RecipeActions from '../actions/recipeAction';
 
 const mapStateToProps = (state) => ({
   ingredientsList: state.ingredient.ingredients
 });
 
+// const mapDispatchToProps = (dispatch) =>
+//   bindActionCreators({ ...RecipeActions }, dispatch);
+
 const FridgeState = (props) => {
+  // if it has props.deleteIngredient, render delete button
   //ingredients will populate here
+  console.log('inside fridge State', props.deleteIngredient);
   console.log('fridgeState props', props.ingredientsList);
   const ingredients = props.ingredientsList.map((item, index) => {
-    return (
-      <div key={`ingred${index}`}>
-        <li>{item}</li>
-        {/* <Button onClick={props.deleteIngredient()}>Pick Ingredients</Button> */}
-      </div>
-    );
+    if (props.deleteIngredient) {
+      return (
+        <div key={`ingred${index}`}>
+          <li>{item}</li>
+          <Button
+            id="deleteButton"
+            onClick={() => props.deleteIngredient(item)}
+          >
+            Delete
+          </Button>
+        </div>
+      );
+    } else {
+      return (
+        <div key={`ingred${index}`}>
+          <li>{item}</li>
+        </div>
+      );
+    }
   });
   return (
     <div className="fridgeState">
