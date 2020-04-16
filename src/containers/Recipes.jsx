@@ -6,7 +6,7 @@ const Recipes = (props) => {
   const recipes = props.recipesList.map((item, index) => {
     return (
       <div className="recipeCard">
-        <li>{item.name}</li>
+        <li><b>{item.name}</b></li>
         <img
           onClick={() => props.updateInstructions(item.id)}
           src={item.picUrl}
@@ -19,7 +19,7 @@ const Recipes = (props) => {
       <h2>Results:</h2>
       {recipes}
 
-      <Button href="/dashboard">Dashboard</Button>
+      <Button id='backBtn' href="/dashboard">Dashboard</Button>
     </div>
   );
 };
