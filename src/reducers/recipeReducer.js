@@ -9,7 +9,10 @@ const recipeState = {
   summary: '',
   summaryPicUrl: '',
   summaryTitle: '',
-  nutrition: ''
+  nutrition: '',
+  prepTime: '',
+  diet: {},
+  externalUrl: ''
 };
 
 const recipeReducer = (state = recipeState, action) => {
@@ -71,12 +74,31 @@ const recipeReducer = (state = recipeState, action) => {
 
     case types.RECEIVED_INSTRUCTIONS:
       console.log(action.payload.data.summary, 'Received instructions');
+      const {
+        summary,
+        image,
+        title,
+        readyInMinutes,
+        sourceUrl,
+        vegetarian,
+        vegan,
+        glutenFree
+      } = action.payload.data;
+
+      const diet = {
+        isVegetarian: vegetarian,
+        isVegan: vegan,
+        isGlutenFree: glutenFree
+      };
       return {
         ...state,
         instructionStatus: 'Received',
-        summary: action.payload.data.summary,
-        summaryPicUrl: action.payload.data.image,
-        summaryTitle: action.payload.data.title
+        summary: summary,
+        summaryPicUrl: image,
+        summaryTitle: title,
+        prepTime: readyInMinutes.toString().concat(' mins'),
+        externalUrl: sourceUrl,
+        diet: diet
       };
     default:
       return state;

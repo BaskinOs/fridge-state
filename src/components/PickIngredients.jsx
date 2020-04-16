@@ -47,9 +47,11 @@ const PickIngredients = (props) => {
     <div className="fridgeState">
       <div className="ingredientsList">
         <ul>{ingredients}</ul>
+        <Button id="showRecipeBtn">Show Recipes</Button>
+        <Button className="menuBtn" id="editFridgeBtn" href="/fridge">
+          Edit Fridge
+        </Button>
       </div>
-      <Button id="showRecipeBtn">Show me the Recipes</Button>
-      <Button id='backBtn' href="/dashboard">Back to Dashboard</Button>
     </div>
   );
 };

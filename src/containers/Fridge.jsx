@@ -41,8 +41,8 @@ const Fridge = (props) => {
         </Button>
       </Form>
       <FridgeState deleteIngredient={props.deleteIngredient} />
-      <Button id='pickIngBtn' href="/ingredients">Pick Ingredients</Button>
-      <Button id='backBtn' href="/dashboard">Back to Dashboard</Button>
+      <Button id='pickIngBtn' href="/ingredients">Choose Ingredients</Button>
+      <Button id='backBtn' href="/dashboard">Dashboard</Button>
     </div>
   );
 };

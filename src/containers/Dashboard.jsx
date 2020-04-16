@@ -5,11 +5,10 @@ import SavedRecipes from '../components/SavedRecipes';
 import FridgeState from '../components/FridgeState';
 
 const Dashboard = (props) => {
-  console.log('props in Dashboard', props)
+  console.log('props in Dashboard', props);
   return (
     <div className="Dashboard">
-      <h2>Dashboard</h2>
-      <section className='profile'>
+      <section className="profile">
         <Media>
           <img
             width={64}
@@ -26,7 +25,10 @@ const Dashboard = (props) => {
       </section>
       <SavedRecipes savedRecipes={props} />
       <FridgeState />
-      <Button className='menuBtn' id='editFridgeBtn' href="/fridge">Edit My Fridge</Button>
+      <Button href="/ingredients">Choose Ingredients</Button> <br />
+      <Button className="menuBtn" id="editFridgeBtn" href="/fridge">
+        Edit Fridge
+      </Button>
       <form id="logout-form" method="GET" action="/auth/logout">
         <button className="logoutBtn" id="logoutBtn" type="submit">
           Logout

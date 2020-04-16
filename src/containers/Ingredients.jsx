@@ -8,6 +8,7 @@ const Ingredients = (props) => {
     <div className="Ingredients">
       <h2>Pick Ingredients</h2>
       <PickIngredients getRecipes={props.getRecipes} />
+      <Button href="/dashboard">Dashboard</Button>
     </div>
   );
 };

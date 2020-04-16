@@ -24,7 +24,10 @@ const mapStateToProps = (state) => ({
   recipesList: state.recipe.recipesList,
   summary: state.recipe.summary,
   summaryPicUrl: state.recipe.summaryPicUrl,
-  summaryTitle: state.recipe.summaryTitle
+  summaryTitle: state.recipe.summaryTitle,
+  prepTime: state.recipe.prepTime,
+  externalUrl: state.recipe.externalUrl,
+  diet: state.recipe.diet
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -119,7 +122,6 @@ class MainContainer extends Component {
             path="/instructions"
             render={(props) => <Instructions {...props} />}
           />
- 
         </React.Fragment>
       );
 
@@ -137,20 +139,22 @@ class MainContainer extends Component {
     if (hasInstructions) {
       console.log('inside has Recipes', hasInstructions);
       console.log('recipesessss', this.props.summary);
+      console.log(this.props.externaUrl);
       component = (
         <Instructions
           summary={this.props.summary}
           summaryPicUrl={this.props.summaryPicUrl}
           summaryTitle={this.props.summaryTitle}
+          prepTime={this.props.prepTime}
+          externalUrl={this.props.externalUrl}
+          diet={this.props.diet}
         />
       );
     }
 
     return (
       <BrowserRouter>
-        <div className="MainContainer">
-          {component}
-        </div>
+        <div className="MainContainer">{component}</div>
       </BrowserRouter>
     );
   }
