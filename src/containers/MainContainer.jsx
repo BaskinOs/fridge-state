@@ -56,6 +56,7 @@ class MainContainer extends Component {
     if (!isLoggedIn) { //not logged in
       component = (
         <div className='landing'>
+          <img src="http://getdrawings.com/free-icon-bw/food-icon-white-19.png" width='300'/>
           <p>Welcome to FridgeState!</p>
           <form id="login-form" method="GET" action="/auth/google">
             <button className="loginBtn" id="loginBtn" type="submit">
