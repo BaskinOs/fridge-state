@@ -3,7 +3,7 @@ const recipeRouter = express.Router();
 
 const recipeController = require('../controllers/recipeController');
 
-recipeRouter.get('/recipe', recipeController.getRecipes, (req, res) => {
+recipeRouter.post('/recipe', recipeController.getRecipes, (req, res) => {
   console.log(res.locals, 'inside ROUTER');
   res.status(200).json(res.locals);
 });
