@@ -8,7 +8,7 @@ recipeRouter.post('/recipe', recipeController.getRecipes, (req, res) => {
   res.status(200).json(res.locals);
 });
 
-recipeRouter.get(
+recipeRouter.post(
   '/instructions',
   recipeController.getIntructions,
   (req, res) => {
