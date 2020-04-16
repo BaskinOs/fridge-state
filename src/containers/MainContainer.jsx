@@ -33,15 +33,11 @@ class MainContainer extends Component {
     super(props);
   }
 
-  // componentDidMount() {
-  //   this.props.getRecipesAction();
-  // }
-
   render() {
     // console.log(this.props, 'This is PROPS');
     const {
       ingredients,
-      getRecipes,
+      getRecipesAction,
       getInstructions,
       updateIngredient, // reducer
       postIngredient, // reducer "newIngredient"
@@ -71,7 +67,7 @@ class MainContainer extends Component {
             <Ingredients
               {...props}
               ingredients={ingredients}
-              getRecipes={getRecipes}
+              getRecipes={getRecipesAction}
             />
           )}
         />

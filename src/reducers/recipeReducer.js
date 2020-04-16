@@ -5,6 +5,9 @@ const recipeState = {
   img: '',
   //video: stretch feature
   ingredient: 'tomatoe',
+  recipeStatus: '',
+  instructionStatus: '',
+  instructions: '',
   nutrition: ''
 };
 
@@ -16,26 +19,50 @@ const recipeReducer = (state = recipeState, action) => {
         ...state,
         recipes: action.payload
       };
-    default:
-      return state;
 
     case types.REQUEST_RECIPES:
       return {
         ...state,
-        recipesList: action.payload
+        recipeStatus: 'Waiting'
       };
 
     case types.FAILED_RECIPES:
       return {
         ...state,
-        recipesList: action.payload
+        recipeStatus: 'failed',
+        error: action.payload
       };
 
-    case types.RECEIVE_RECIPES:
+    case types.RECEIVED_RECIPES:
+      console.log(action.payload, 'payload');
       return {
         ...state,
-        recipesList: action.payload
+        recipeStatus: 'received',
+        recipesList: [...action.payload]
       };
+
+    case types.REQUEST_INSTRUCTIONS:
+      return {
+        ...state,
+        instructionStatus: 'Waiting'
+      };
+
+    case types.FAILED_INSTRUCTIONS:
+      return {
+        ...state,
+        instructionStatus: 'Failed',
+        error: action.payload
+      };
+
+    case types.RECEIVED_INSTRUCTIONS:
+      console.log(action.payload, 'instructions');
+      return {
+        ...state,
+        instructionStatus: 'Received',
+        instructions: [...action.payload]
+      };
+    default:
+      return state;
   }
 };
 
