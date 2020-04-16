@@ -33,6 +33,7 @@ authRouter.get('/google/callback', passport.authenticate('google'), authCheck, (
 });
 
 authRouter.get('/verify', userController.verify, (req, res) => {
+  // console.log('res.locals in /verify', res.locals);
   res.status(200).json(res.locals);
 })
 

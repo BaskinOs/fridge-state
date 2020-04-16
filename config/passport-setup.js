@@ -24,11 +24,9 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       // params received from callback
-      // console.log(profile.photos[0].value);
       //check if user already exists
       ModelUser.findOne({ providerId: profile.id }).then((currentUser) => {
         if (currentUser) {
-          // console.log('user found', currentUser);
           done(null, currentUser);
         } else {
           //create a new user
@@ -39,7 +37,6 @@ passport.use(
           })
             .save()
             .then((newUser) => {
-              // console.log('new user created', newUser);
               done(null, newUser);
             });
         }
