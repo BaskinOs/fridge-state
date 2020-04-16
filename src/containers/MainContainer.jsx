@@ -38,23 +38,34 @@ class MainContainer extends Component {
     // console.log('componentWillUnmount');
   }
 
-  render() {
-    const isLoggedIn = this.props.isLoggedIn;
+  render() {    
+    const {
+      isLoggedIn,
+      userName,
+      profilePic,
+      updateIngredient,
+      postIngredient,
+      deleteIngredient,
+      ingredientInput,
+      getIngredients,
+      ingredientsList
+    } = this.props;
     // console.log('MainCotainer isLoggedIn', isLoggedIn);
 
     let component;
     if (!isLoggedIn) { //not logged in
       component = (
-        <p>Welcome to FridgeState!</p>
+        <div className='landing'>
+          <p>Welcome to FridgeState!</p>
+          <form id="login-form" method="GET" action="/auth/google">
+            <button className="loginBtn" id="loginBtn" type="submit">
+              Login with Google
+            </button>
+          </form>
+        </div>
       );
     } else component = ( //logged in - render different routes
       <React.Fragment>
-        <section className='profile'>
-          <div>
-            <img width='100' src={this.props.profilePic}/>
-            <p>Hello, {this.props.userName}!</p>
-          </div>
-        </section>
         <Route
         path="/fridge"
         render={(routeProps) => (
@@ -81,27 +92,21 @@ class MainContainer extends Component {
         <Route
           path="/dashboard"
           render={(routeProps) => (
-            <Dashboard {...routeProps} getIngredients={getIngredients} />
+            <Dashboard {...routeProps} getIngredients={getIngredients} profilePic={profilePic} userName={userName} />
           )}
           isAuthed={true}
         />        
       </React.Fragment>
     );
 
-    const {
-      updateIngredient,
-      postIngredient,
-      deleteIngredient,
-      ingredientInput,
-      getIngredients,
-      ingredientsList
-    } = this.props;
+
     return (
       <BrowserRouter>
-        <div className="MainContainer">Main Container</div>
-        <Route path="/" exact component={Landing} />
-        {/*render component based on state of user login*/}
-        {component}
+        <div className="MainContainer">
+          {/* <Route path="/" exact component={Landing} /> */}
+          {/*render component based on state of user login*/}
+          {component}
+        </div>
       </BrowserRouter>
     );
   }

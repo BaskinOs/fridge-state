@@ -10,12 +10,7 @@ const Landing = (props) => {
           Login with Google
         </button>
       </form>
-      {/* <form id="logout-form" method="GET" action="/auth/logout">
-        <button className="loginBtn" id="loginBtn" type="submit">
-          Logout
-        </button>
-      </form> */}
-      {/* <Button href="/fridge">Move to Fridge</Button> */}
+
     </div>
   );
 };

@@ -1,3 +1,44 @@
+//font
+@import url('https://fonts.googleapis.com/css?family=Bungee|Raleway&display=swap');
+$Raleway:'Raleway', sans-serif;
+$Bungee:'Bungee', cursive;
+
+//colors
+$light: #c2dde6;
+$whitish: #f9ffff;
+$lightblue: #AED9E0;
+$navy: #3D405B;
+$cadet: #5E6472;
+$beige: #FAF3DD;
+$peachOrange: #F2CC8F;
+
+
 body {
-  background-color: grey;
+  background-color: $light;
+  font-family: $Raleway;
+  color: $cadet;
+}
+
+h1 { //title
+  font-family: $Bungee;
+  color: $whitish;
+  -webkit-text-stroke: 1px $navy;
+}
+
+//Dashboard
+.Dashboard {
+  
+  .fridgeState{
+    position: absolute;
+    bottom: 0.5rem;
+    left: 12em;
+    margin: 0;
+    // background-color: rgba($color: white, $alpha: 0.5);
+    // padding: 1em;
+  }
+  #fridgeImg {
+    width: 500px;
+    opacity: 0.7;
+  }
+
 }
