@@ -23,12 +23,9 @@ const PickIngredients = (props) => {
       }
     });
     let vals = arr.join(',');
-    let str =
-      'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=1&ranking=1&ignorePantry=true&ingredients=' +
-      vals;
     // update the state here!!!!
-    console.log(str);
-    props.pickIngredients(str);
+    console.log(vals);
+    props.pickIngredients(vals);
   });
 
   const ingredients = props.ingredientsList.map((item, index) => {
