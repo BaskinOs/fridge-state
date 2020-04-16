@@ -33,7 +33,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Route handlers
-app.use('/recipes', recipeRouter);
+app.use('/fetchrecipes', recipeRouter);
 app.use('/auth', authRouter);
 app.use('/api', apiRouter);
 

@@ -20,7 +20,11 @@ const mapStateToProps = (state) => ({
   ingredientInput: state.ingredient.ingredientInput,
   isLoggedIn: state.user.isLoggedIn,
   userName: state.user.userName,
-  profilePic: state.user.profilePic
+  profilePic: state.user.profilePic,
+  recipesList: state.recipe.recipesList,
+  summary: state.recipe.summary,
+  summaryPicUrl: state.recipe.summaryPicUrl,
+  summaryTitle: state.recipe.summaryTitle
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -44,13 +48,20 @@ class MainContainer extends Component {
   }
 
   render() {
+    console.log('SUMMARY', this.props.summary);
+    // hasRecipes boolean
+    // console.log('inside maincontainer', this.props.recipesList);
+    const hasRecipes = this.props.recipesList.length > 0;
     const isLoggedIn = this.props.isLoggedIn;
+    // console.log('instructions!!!!!', this.props.instructions);
+    const hasInstructions = this.props.summary.length > 0;
     // console.log('MainCotainer isLoggedIn', isLoggedIn);
-
     let component;
+
     if (!isLoggedIn) {
       //not logged in
-      component = <p>Welcome to FridgeState!</p>;
+
+      component = <Landing />;
     } else
       component = ( //logged in - render different routes
         <React.Fragment>
@@ -76,7 +87,9 @@ class MainContainer extends Component {
           />
           <Route
             path="/ingredients"
-            render={(props) => <Ingredients {...props} />}
+            render={(routeProps) => (
+              <Ingredients {...routeProps} getRecipes={getRecipes} />
+            )}
           />
           <Route path="/recipes" render={(props) => <Recipes {...props} />} />
           <Route
@@ -93,18 +106,41 @@ class MainContainer extends Component {
         </React.Fragment>
       );
 
+    if (hasRecipes) {
+      console.log('inside has Recipes', hasRecipes);
+      console.log('recipesessss', this.props.recipesList);
+      component = (
+        <Recipes
+          recipesList={this.props.recipesList}
+          updateInstructions={this.props.updateInstructions}
+        />
+      );
+    }
+
+    if (hasInstructions) {
+      console.log('inside has Recipes', hasInstructions);
+      console.log('recipesessss', this.props.summary);
+      component = (
+        <Instructions
+          summary={this.props.summary}
+          summaryPicUrl={this.props.summaryPicUrl}
+          summaryTitle={this.props.summaryTitle}
+        />
+      );
+    }
+
     const {
       updateIngredient,
       postIngredient,
       deleteIngredient,
       ingredientInput,
       getIngredients,
-      ingredientsList
+      ingredientsList,
+      getRecipes
     } = this.props;
     return (
       <BrowserRouter>
         <div className="MainContainer">Main Container</div>
-        <Route path="/" exact component={Landing} />
         {/*render component based on state of user login*/}
         {component}
       </BrowserRouter>

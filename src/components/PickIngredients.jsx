@@ -22,13 +22,10 @@ const PickIngredients = (props) => {
         arr.push($(this).val());
       }
     });
-    let vals = arr.join(',');
-    let str =
-      'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=1&ranking=1&ignorePantry=true&ingredients=' +
-      vals;
+    let string = arr.join(',');
     // update the state here!!!!
-    console.log(str);
-    props.pickIngredients(str);
+    console.log('this is the string', string);
+    props.getRecipes(string);
   });
 
   const ingredients = props.ingredientsList.map((item, index) => {
@@ -51,9 +48,7 @@ const PickIngredients = (props) => {
       <h4>Pick Ingredients</h4>
       <div className="ingredientsList">
         <ul>{ingredients}</ul>
-        <Button id="button" href="/recipes">
-          Show me the Recipes
-        </Button>
+        <Button id="button">Show me the Recipes</Button>
       </div>
     </div>
   );

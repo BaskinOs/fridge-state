@@ -1,12 +1,14 @@
 import * as types from '../constants/actionTypes';
 
 const recipeState = {
-  recipesList: [], //recipes
-  img: '',
+  // recipesList includes an array of objects with keys recipeId, recipeName, and recipeImg
+  recipesList: [], //recipes and images
   //video: stretch feature
   recipeStatus: '',
   instructionStatus: '',
-  instructions: '',
+  summary: '',
+  summaryPicUrl: '',
+  summaryTitle: '',
   nutrition: ''
 };
 
@@ -34,11 +36,23 @@ const recipeReducer = (state = recipeState, action) => {
       };
 
     case types.RECEIVED_RECIPES:
-      console.log(action.payload, 'Received Recipes');
+      console.log(action.payload.data, 'Received Recipes');
+      // add logic here to get recipeId, recipe img, and name
+      // map the array of objects to reflect the new array of objects
+      const recipes = action.payload.data.map((recipe) => {
+        console.log(recipe.title);
+        let obj = {
+          id: recipe.id,
+          name: recipe.title,
+          picUrl: recipe.image
+        };
+        return obj;
+      });
+      console.log(recipes);
       return {
         ...state,
         recipeStatus: 'received',
-        recipesList: [...action.payload]
+        recipesList: recipes
       };
 
     case types.REQUEST_INSTRUCTIONS:
@@ -56,11 +70,13 @@ const recipeReducer = (state = recipeState, action) => {
       };
 
     case types.RECEIVED_INSTRUCTIONS:
-      console.log(action.payload, 'Received instructions');
+      console.log(action.payload.data.summary, 'Received instructions');
       return {
         ...state,
         instructionStatus: 'Received',
-        instructions: [...action.payload]
+        summary: action.payload.data.summary,
+        summaryPicUrl: action.payload.data.image,
+        summaryTitle: action.payload.data.title
       };
     default:
       return state;

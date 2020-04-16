@@ -4,10 +4,10 @@ const fetch = require('node-fetch');
 const recipeController = {};
 
 recipeController.getRecipes = (req, res, next) => {
-  // const { ing1, ing2, ing3, ing4, ing5 } = req.body;
+  const { ingredients } = req.body;
 
   fetch(
-    'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=1&ranking=1&ignorePantry=true&ingredients=apples,flour,sugar',
+    `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=3&ranking=1&ignorePantry=true&ingredients=${ingredients}`,
     {
       method: 'GET',
       headers: {
@@ -27,10 +27,10 @@ recipeController.getRecipes = (req, res, next) => {
 };
 
 recipeController.getIntructions = (req, res, next) => {
-  // const { recipe_id } = req.body;
+  const { recipe_id } = req.body;
 
   fetch(
-    'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/48191/information',
+    `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/information`,
     {
       method: 'GET',
       headers: {
