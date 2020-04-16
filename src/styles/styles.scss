@@ -1,8 +1,5 @@
 //font
-@import url('https://fonts.googleapis.com/css?family=Bungee|Raleway&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@300&family=Gravitas+One&family=Noto+Sans&family=Work+Sans&display=swap');
-$Raleway:'Raleway', sans-serif;
-$Bungee:'Bungee', cursive;
 $NotoSans:'Noto Sans', sans-serif;
 $WorkSans:'Work Sans', sans-serif;
 $Gravitas:'Gravitas One', cursive;
@@ -43,24 +40,35 @@ h2 {
 }
 
 //buttons
-button {
+button,
+#editFridgeBtn,
+#pickIngBtn,
+#postButton,
+#showRecipeBtn,
+#backBtn {
   border: none;
   background-color: $green;
   color: $whitish;
   border-radius: 4px;
+  font-size: 0.9em;
   margin: 1em;
+  padding: 0.2em 1em 0.2em 1em;
   &:hover {
     opacity: 0.8;
   }
 }
-
 .loginBtn {
   background-color: $googleRed;
 }
 .logoutBtn {
   background-color: $cadet;
+  margin-top: 0;
+}
+#backBtn {
+  background-color: $cadet;
 }
 
+//pages
 .App {
   display: flex;
   flex-direction: column;
@@ -79,14 +87,18 @@ button {
 
 }
 
+.profile, .savedRecipes, .fridgeState, .Fridge {
+  margin: 1.5em;
+}
+
 //FridgeState
 .card {
   background: rgba($color: #f9ffff, $alpha: 0.7);
-  background-image: url("https://cdn.clipart.email/58dd1c9ffac390819ca83c8a0d175811_refrigerator-black-and-white-transparent-png-clipart-free-_512-512.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
+  // background-image: url("https://cdn.clipart.email/58dd1c9ffac390819ca83c8a0d175811_refrigerator-black-and-white-transparent-png-clipart-free-_512-512.png");
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // position: relative;
 }
 
 //Dashboard

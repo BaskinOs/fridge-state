@@ -24,7 +24,10 @@ const mapStateToProps = (state) => ({
   recipesList: state.recipe.recipesList,
   summary: state.recipe.summary,
   summaryPicUrl: state.recipe.summaryPicUrl,
-  summaryTitle: state.recipe.summaryTitle
+  summaryTitle: state.recipe.summaryTitle,
+  prepTime: state.recipe.prepTime,
+  externalUrl: state.recipe.externalUrl,
+  diet: state.recipe.diet
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -90,12 +93,19 @@ class MainContainer extends Component {
     } else
       component = ( //logged in - render different routes
         <React.Fragment>
-          <section className="profile">
-            <div>
-              <img width="100" src={profilePic} />
-              <p>Hello, {userName}!</p>
-            </div>
-          </section>
+          <Route
+            exact
+            path={['/', '/dashboard']}
+            render={(routeProps) => (
+              <Dashboard
+                {...routeProps}
+                getIngredients={getIngredients}
+                profilePic={profilePic}
+                userName={userName}
+              />
+            )}
+            isAuthed={true}
+          />
           <Route
             path="/fridge"
             render={(routeProps) => (
@@ -121,18 +131,6 @@ class MainContainer extends Component {
             path="/instructions"
             render={(props) => <Instructions {...props} />}
           />
-          <Route
-            path="/dashboard"
-            render={(routeProps) => (
-              <Dashboard
-                {...routeProps}
-                getIngredients={getIngredients}
-                profilePic={profilePic}
-                userName={userName}
-              />
-            )}
-            isAuthed={true}
-          />
         </React.Fragment>
       );
 
@@ -150,12 +148,16 @@ class MainContainer extends Component {
     if (hasInstructions) {
       console.log('inside has Recipes', hasInstructions);
       console.log('recipesessss', this.props.summary);
+      console.log(this.props.externaUrl);
       component = (
         <Instructions
           clearSummary={this.props.clearSummary}
           summary={this.props.summary}
           summaryPicUrl={this.props.summaryPicUrl}
           summaryTitle={this.props.summaryTitle}
+          prepTime={this.props.prepTime}
+          externalUrl={this.props.externalUrl}
+          diet={this.props.diet}
         />
       );
     }
