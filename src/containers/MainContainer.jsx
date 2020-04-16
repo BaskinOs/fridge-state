@@ -141,7 +141,6 @@ class MainContainer extends Component {
     return (
       <BrowserRouter>
         <div className="MainContainer">Main Container</div>
-
         {/*render component based on state of user login*/}
         {component}
       </BrowserRouter>
