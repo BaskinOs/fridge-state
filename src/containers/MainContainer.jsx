@@ -77,23 +77,32 @@ class MainContainer extends Component {
 
       // component = <Landing />;
       component = (
-      <div className='landing'>
-        <img src="http://getdrawings.com/free-icon-bw/food-icon-white-19.png" width='300'/>
-        <p>Welcome to FridgeState!</p>
-        <form id="login-form" method="GET" action="/auth/google">
-          <button className="loginBtn" id="loginBtn" type="submit">
-            Login with Google
-          </button>
-        </form>
-      </div>
-      )
+        <div className="landing">
+          <img
+            src="http://getdrawings.com/free-icon-bw/food-icon-white-19.png"
+            width="300"
+          />
+          <p>Welcome to FridgeState!</p>
+          <form id="login-form" method="GET" action="/auth/google">
+            <button className="loginBtn" id="loginBtn" type="submit">
+              Login with Google
+            </button>
+          </form>
+        </div>
+      );
     } else
       component = ( //logged in - render different routes
         <React.Fragment>
           <Route
-            exact path={["/", "/dashboard"]}
+            exact
+            path={['/', '/dashboard']}
             render={(routeProps) => (
-              <Dashboard {...routeProps} getIngredients={getIngredients} profilePic={profilePic} userName={userName}/>
+              <Dashboard
+                {...routeProps}
+                getIngredients={getIngredients}
+                profilePic={profilePic}
+                userName={userName}
+              />
             )}
             isAuthed={true}
           />
@@ -142,6 +151,7 @@ class MainContainer extends Component {
       console.log(this.props.externaUrl);
       component = (
         <Instructions
+          clearSummary={this.props.clearSummary}
           summary={this.props.summary}
           summaryPicUrl={this.props.summaryPicUrl}
           summaryTitle={this.props.summaryTitle}
