@@ -21,7 +21,8 @@ export const postIngredient = () => (dispatch, getState) =>
         payload: data
       }).catch((err) => console.log(err));
       // }
-    });
+    })
+    .catch((err) => console.log(`ERR in postIngredient Action: ${err}`));
 
 export const getIngredients = () => (dispatch, getState) => {
   axios
@@ -62,14 +63,32 @@ export const deleteIngredient = () => (dispatch, getState) =>
           payload: data
         });
       }
-    });
+    })
+    .catch((err) => console.log(`ERR in deleteIngredient Action: ${err}`));
 
 export const updateIngredient = (event) => ({
   type: types.UPDATE_INGREDIENT,
   payload: event.target.value
 });
 
-export const pickIngredients = (string) => ({
-  type: types.PICK_INGREDIENTS,
-  payload: string
-});
+export const pickIngredients = (string) => (dispatch, getState) => {
+  axios
+    .post('/fetchrecipes/recipe', {
+      ingredients: string
+    })
+    .then(({ data }) => {
+      console.log('getRecipes', data);
+      // if (!data.isLoggedIn) {
+      //   dispatch({
+      //     type: types.USER_LOGOUT,
+      //     payload: data
+      //   });
+      // } else {
+      // console.log('This is postingredient', data);
+      // dispatch({
+      //   type: types.POST_INGREDIENT,
+      //   payload: data
+    })
+    .catch((err) => console.log(err));
+  // }
+};
