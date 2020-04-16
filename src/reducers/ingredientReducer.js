@@ -2,7 +2,8 @@ import * as types from '../constants/actionTypes';
 
 const ingredientState = {
   ingredients: [],
-  ingredientInput: ''
+  ingredientInput: '',
+  pickedIngredients: ''
 };
 
 const ingredientReducer = (state = ingredientState, action) => {
@@ -26,6 +27,8 @@ const ingredientReducer = (state = ingredientState, action) => {
       };
     case types.UPDATE_INGREDIENT:
       return { ...state, ingredientInput: action.payload };
+    case types.PICK_INGREDIENTS:
+      return { ...state, pickedIngredients: action.payload };
     default:
       return state;
   }

@@ -68,3 +68,8 @@ export const updateIngredient = (event) => ({
   type: types.UPDATE_INGREDIENT,
   payload: event.target.value
 });
+
+export const pickIngredients = (string) => ({
+  type: types.PICK_INGREDIENTS,
+  payload: string
+});
