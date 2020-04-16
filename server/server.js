@@ -9,7 +9,7 @@ const passport = require('passport');
 const recipeRouter = require('./routes/recipe');
 const authRouter = require('./routes/auth');
 const passportSetup = require('../config/passport-setup');
-// const apiRouter = require("./routes/api");
+const apiRouter = require('./routes/api');
 // import { initialiseAuthentication } from "./auth";
 
 const app = express();
