@@ -5,6 +5,7 @@ const userController = {};
 
 //controller to verify user login
 userController.verify = (req, res, next) => {
+
   try {
     //use userId in req.session.user to verify user
     if (req.session.passport.user) {
@@ -27,6 +28,7 @@ userController.verify = (req, res, next) => {
 };
 
 userController.getIngredients = (req, res, next) => {
+ 
   console.log('userCont.getIngred req.session.passport', req.session.passport)
   if (req.session.passport.user) { //passport must be valid
     let id = req.session.passport.user;
@@ -42,6 +44,7 @@ userController.getIngredients = (req, res, next) => {
 };
 
 userController.postUser = (req, res, next) => {
+  
   const { user } = req.body;
   ModelUser.create(user, (err, userCreated) => {
     if (err) {
@@ -51,17 +54,8 @@ userController.postUser = (req, res, next) => {
   });
 };
 
-userController.getItems = (req, res, next) => {
-  ModelUser.find({}, (err, foundItems) => {
-    if (err) {
-      return next(err);
-    }
-    res.locals.ingredients = user.ingredients;
-    return next();
-  });
-};
-
 userController.getRecipes = (req, res, next) => {
+ 
   console.log('userCont.getRecipes req.session.passport', req.session.passport)
   if (req.session.passport.user) {
     let id = req.session.passport.user;
@@ -77,6 +71,7 @@ userController.getRecipes = (req, res, next) => {
 };
 
 userController.postIngredient = (req, res, next) => {
+
   const { ingredient } = req.body;
   // console.log(ingredient);
   if (req.session.passport.user) {
@@ -94,7 +89,20 @@ userController.postIngredient = (req, res, next) => {
   }
 };
 
+userController.deleteIngredient = (req, res, next) => {
+ 
+  const { ingredientToDelete } = req.body
+  ModelUser.updateOne({_id:"5e9672ca8687611204c9b017"}, { "$pull": { "ingredients":ingredientToDelete}},(err, foundIngredient) => {   
+    if (err) {
+      return next(err);
+    }
+    return next();
+  });
+}
+
+
 userController.postRecipe = (req, res, next) => {
+
   console.log('userCont.postRecipe req.session.passport', req.session.passport)
   if (req.session.passport.user) {
     let id = req.session.passport.user;
