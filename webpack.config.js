@@ -14,7 +14,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'public'),
     proxy: [
       {
-        context: ['/api', '/auth', '/recipes'],
+        context: ['/api', '/auth', '/fetchrecipes'],
         target: 'http://localhost:3000'
       }
     ],
