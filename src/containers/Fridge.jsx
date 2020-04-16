@@ -30,7 +30,7 @@ const Fridge = (props) => {
           Add
         </Button>
       </Form>
-      <FridgeState />
+      <FridgeState deleteIngredient={props.deleteIngredient} />
       <Button href="/ingredients">Pick Ingredients</Button> <br />
       <Button href="/dashboard">Back to Dashboard</Button>
     </div>

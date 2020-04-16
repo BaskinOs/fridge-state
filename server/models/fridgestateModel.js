@@ -10,17 +10,18 @@ mongoose
     useFindAndModify: false
   })
   .then(() => console.log('Connected'))
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));
 
 const User = new Schema({
   providerId: String,
   userName: String,
-  savedRecipes: [], 
-  ingredients: [String], 
+  picURL: String,
+  savedRecipes: [],
+  ingredients: [String]
 });
 
 const ModelUser = mongoose.model('user', User);
 
 module.exports = {
-  ModelUser,
+  ModelUser
 };

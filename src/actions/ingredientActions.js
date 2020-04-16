@@ -19,7 +19,7 @@ export const postIngredient = () => (dispatch, getState) =>
       dispatch({
         type: types.POST_INGREDIENT,
         payload: data
-      });
+      }).catch((err) => console.log(err));
       // }
     });
 
@@ -58,7 +58,7 @@ export const deleteIngredient = () => (dispatch, getState) =>
         });
       } else {
         dispatch({
-          type: types.DELETE_INGREDIENTS,
+          type: types.DELETE_INGREDIENT,
           payload: data
         });
       }
