@@ -51,8 +51,11 @@ const Instructions = (props) => {
           </button>
       </div>
       <br />
-      <Button id='pickIngBtn' href="/ingredients">Pick Ingredients</Button> 
-      <Button id='backBtn' href="/dashboard">Dashboard</Button>
+      <Button id='pickIngBtn' href="/ingredients">Choose Ingredients</Button>
+      <Button id='recipeBtn' onClick={() => props.clearSummary()}>Recipes</Button>
+      {/* <button onClick={() => props.clearSummary()}>Recipes</button> */}
+      <br />
+      <Button id='backBtn' href="/dashboard">Go to Dashboard</Button>
     </div>
   );
 };

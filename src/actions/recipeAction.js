@@ -33,3 +33,8 @@ export const updateInstructions = (id) => (dispatch, getState) =>
         payload: err
       })
     );
+
+export const clearSummary = (event) => ({
+  type: types.CLEAR_SUMMARY,
+  payload: ''
+});

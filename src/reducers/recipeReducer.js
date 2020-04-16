@@ -100,6 +100,12 @@ const recipeReducer = (state = recipeState, action) => {
         externalUrl: sourceUrl,
         diet: diet
       };
+
+    case types.CLEAR_SUMMARY:
+      return {
+        ...state,
+        summary: action.payload
+      };
     default:
       return state;
   }
