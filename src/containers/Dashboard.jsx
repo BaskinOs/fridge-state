@@ -25,10 +25,14 @@ const Dashboard = (props) => {
       </section>
       <SavedRecipes savedRecipes={props} />
       <FridgeState />
-      <Button href="/ingredients">Choose Ingredients</Button> <br />
-      <Button className="menuBtn" id="editFridgeBtn" href="/fridge">
-        Edit Fridge
-      </Button>
+      <div className='buttons'>
+        <Button className="menuBtn" id="pickIngBtn" href="/ingredients">
+          Choose Ingredients
+        </Button>
+        <Button className="menuBtn" id="editFridgeBtn" href="/fridge">
+          Edit Fridge
+        </Button>
+      </div>
       <form id="logout-form" method="GET" action="/auth/logout">
         <button className="logoutBtn" id="logoutBtn" type="submit">
           Logout
