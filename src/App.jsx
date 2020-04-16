@@ -4,9 +4,11 @@ import styles from './styles/styles.scss';
 
 import MainContainer from './containers/MainContainer';
 
-import Login from './components/Login.jsx';
-
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div className="App">

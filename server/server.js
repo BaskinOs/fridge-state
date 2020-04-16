@@ -2,11 +2,13 @@ require("dotenv").config(); //dotenv configuration should be in line 1
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
 
 //import routes
 const authRouter = require("./routes/auth");
 const passportSetup = require("../config/passport-setup");
-// const apiRouter = require("./routes/api");
+const apiRouter = require("./routes/api");
 // import { initialiseAuthentication } from "./auth";
 
 const app = express();
@@ -14,15 +16,22 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(cookieParser());
+
 // app.use(passport.initialize());
 
+//encrypt cookie, age = day
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000, // 1 day
+  keys: [process.env.COOKIE_KEY]
+}))
+
+//initialize passport
+app.use(passport.initialize());
+app.use(passport.session()); 
+
 //Route handlers
-// app.use("/api", apiRouter);
 app.use("/auth", authRouter);
-app.use('/api', (req, res) => {
-  console.log('in api');
-  res.send('hello');
-})
+app.use("/api", apiRouter);
 
 // handle static files
 app.use("/dist", express.static(path.join(__dirname, "../dist")));
@@ -55,6 +64,6 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(
-    `Server is listening on port: ${`http://localhost:${PORT}/`}...!!!!!! `
+    `Server is listening on port: ${`http://localhost:${PORT}/`}...!`
   );
 });
