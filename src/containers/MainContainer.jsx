@@ -152,6 +152,7 @@ class MainContainer extends Component {
       console.log('recipesessss', this.props.summary);
       component = (
         <Instructions
+          clearSummary={this.props.clearSummary}
           summary={this.props.summary}
           summaryPicUrl={this.props.summaryPicUrl}
           summaryTitle={this.props.summaryTitle}

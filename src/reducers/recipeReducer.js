@@ -78,6 +78,12 @@ const recipeReducer = (state = recipeState, action) => {
         summaryPicUrl: action.payload.data.image,
         summaryTitle: action.payload.data.title
       };
+
+    case types.CLEAR_SUMMARY:
+      return {
+        ...state,
+        summary: action.payload
+      };
     default:
       return state;
   }
