@@ -4,7 +4,6 @@ const recipeState = {
   recipesList: [], //recipes
   img: '',
   //video: stretch feature
-  ingredient: 'tomatoe',
   recipeStatus: '',
   instructionStatus: '',
   instructions: '',
@@ -27,6 +26,7 @@ const recipeReducer = (state = recipeState, action) => {
       };
 
     case types.FAILED_RECIPES:
+      console.log('In Failed Recipes');
       return {
         ...state,
         recipeStatus: 'failed',
@@ -34,7 +34,7 @@ const recipeReducer = (state = recipeState, action) => {
       };
 
     case types.RECEIVED_RECIPES:
-      console.log(action.payload, 'payload');
+      console.log(action.payload, 'Received Recipes');
       return {
         ...state,
         recipeStatus: 'received',
@@ -48,6 +48,7 @@ const recipeReducer = (state = recipeState, action) => {
       };
 
     case types.FAILED_INSTRUCTIONS:
+      console.log('In Failed Instructions');
       return {
         ...state,
         instructionStatus: 'Failed',
@@ -55,7 +56,7 @@ const recipeReducer = (state = recipeState, action) => {
       };
 
     case types.RECEIVED_INSTRUCTIONS:
-      console.log(action.payload, 'instructions');
+      console.log(action.payload, 'Received instructions');
       return {
         ...state,
         instructionStatus: 'Received',
