@@ -45,14 +45,13 @@ class MainContainer extends Component {
     let component;
     if (!isLoggedIn) { //not logged in
       component = (
-        <p>Please log in to use the app</p>
+        <p>Welcome to FridgeState!</p>
       );
     } else component = ( //logged in - render different routes
       <React.Fragment>
-        <p>Logged In!</p>
         <section className='profile'>
           <div>
-            <img src={this.props.profilePic}/>
+            <img width='100' src={this.props.profilePic}/>
             <p>Hello, {this.props.userName}!</p>
           </div>
         </section>
