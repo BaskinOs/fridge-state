@@ -71,7 +71,24 @@ export const updateIngredient = (event) => ({
   payload: event.target.value
 });
 
-export const pickIngredients = (string) => ({
-  type: types.PICK_INGREDIENTS,
-  payload: string
-});
+export const pickIngredients = (string) => (dispatch, getState) => {
+  axios
+    .post('/recipes/recipe', {
+      ingredients: string
+    })
+    .then(({ data }) => {
+      console.log('getRecipes', data);
+      // if (!data.isLoggedIn) {
+      //   dispatch({
+      //     type: types.USER_LOGOUT,
+      //     payload: data
+      //   });
+      // } else {
+      // console.log('This is postingredient', data);
+      // dispatch({
+      //   type: types.POST_INGREDIENT,
+      //   payload: data
+    })
+    .catch((err) => console.log(err));
+  // }
+};
