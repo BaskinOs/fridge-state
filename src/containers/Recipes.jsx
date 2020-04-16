@@ -6,7 +6,9 @@ const Recipes = (props) => {
   const recipes = props.recipesList.map((item, index) => {
     return (
       <div className="recipeCard">
-        <li>{item.name}</li>
+        <li>
+          <b>{item.name}</b>
+        </li>
         <img
           onClick={() => props.updateInstructions(item.id)}
           src={item.picUrl}
@@ -18,8 +20,13 @@ const Recipes = (props) => {
     <div className="Recipes">
       <h2>Results:</h2>
       {recipes}
-      <Button href="/ingredients">Back to Ingredients</Button> <br />
-      <Button href="/dashboard">Dashboard</Button>
+      <Button id="pickIngBtn" href="/ingredients">
+        Back to Ingredients
+      </Button>{' '}
+      <br />
+      <Button id="backBtn" href="/dashboard">
+        Dashboard
+      </Button>
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import * as types from '../constants/actionTypes';
 
-export const getRecipes = (string) => (dispatch, getState) =>
+export const getRecipes = (string) => (dispatch, getState) => {
+  console.log('inside getRecipes');
   axios
     .post('/fetchrecipes/recipe', {
       ingredients: string
@@ -13,7 +14,8 @@ export const getRecipes = (string) => (dispatch, getState) =>
         payload: data
       });
     })
-    .catch((err) => console.log('error in ', err));
+    .catch((err) => console.log(err));
+};
 
 export const updateInstructions = (id) => (dispatch, getState) =>
   axios

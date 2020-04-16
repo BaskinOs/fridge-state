@@ -17,6 +17,7 @@ const PickIngredients = (props) => {
   console.log('fridgeState props', props.ingredientsList);
   $('#showRecipeBtn').on('click', function () {
     let arr = [];
+    console.log('inside show recipe');
     $(':checkbox').each(function () {
       if ($(this).is(':checked')) {
         arr.push($(this).val());
@@ -52,6 +53,9 @@ const PickIngredients = (props) => {
           Edit Fridge
         </Button>
       </div>
+      <Button id="backBtn" href="/dashboard">
+        Dashboard
+      </Button>
     </div>
   );
 };

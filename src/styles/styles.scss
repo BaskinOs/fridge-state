@@ -45,13 +45,14 @@ button,
 #pickIngBtn,
 #postButton,
 #showRecipeBtn,
+#recipeBtn,
 #backBtn {
   border: none;
   background-color: $green;
   color: $whitish;
   border-radius: 4px;
   font-size: 0.9em;
-  margin: 1em;
+  margin: 1em 1em 0 0;
   padding: 0.2em 1em 0.2em 1em;
   &:hover {
     opacity: 0.8;
@@ -62,10 +63,14 @@ button,
 }
 .logoutBtn {
   background-color: $cadet;
-  margin-top: 0;
+  margin-bottom: 2em;
 }
 #backBtn {
   background-color: $cadet;
+}
+.sourceBtn {
+  align-self: flex-start;
+  margin: 0;
 }
 
 //pages
@@ -87,8 +92,61 @@ button,
 
 }
 
-.profile, .savedRecipes, .fridgeState, .Fridge {
+.profile, 
+.savedRecipes, 
+.fridgeState, 
+.Fridge,
+.Recipes,
+.Instructions {
   margin: 1.5em;
+}
+
+//Recipes
+.Recipes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  li {
+    padding: 0.5em;
+    list-style-type: none;
+    font-family: $BioRhyme;
+  }
+  img {
+    border-radius: 30%;
+    &:hover {
+      opacity: 0.5
+    }
+  }
+}
+
+.recipeCard {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+//Instructions
+.Instructions {
+
+  .summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .dietIcon {
+      margin-left: .5em;
+      margin-bottom: .5em;
+    }
+    .recipeImg {
+      margin: .5em 1em 1em 1em;
+    }
+    .recipeSummary {
+      padding: 1em;
+      margin-bottom: 0
+    }
+  }
 }
 
 //FridgeState
