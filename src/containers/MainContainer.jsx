@@ -24,7 +24,10 @@ const mapStateToProps = (state) => ({
   recipesList: state.recipe.recipesList,
   summary: state.recipe.summary,
   summaryPicUrl: state.recipe.summaryPicUrl,
-  summaryTitle: state.recipe.summaryTitle
+  summaryTitle: state.recipe.summaryTitle,
+  prepTime: state.recipe.prepTime,
+  externalUrl: state.recipe.externalUrl,
+  diet: state.recipe.diet
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -74,25 +77,28 @@ class MainContainer extends Component {
 
       // component = <Landing />;
       component = (
-      <div className='landing'>
-      <img src="http://getdrawings.com/free-icon-bw/food-icon-white-19.png" width='300'/>
-      <p>Welcome to FridgeState!</p>
-      <form id="login-form" method="GET" action="/auth/google">
-        <button className="loginBtn" id="loginBtn" type="submit">
-          Login with Google
-        </button>
-      </form>
-    </div>
-      )
+        <div className="landing">
+          <img
+            src="http://getdrawings.com/free-icon-bw/food-icon-white-19.png"
+            width="300"
+          />
+          <p>Welcome to FridgeState!</p>
+          <form id="login-form" method="GET" action="/auth/google">
+            <button className="loginBtn" id="loginBtn" type="submit">
+              Login with Google
+            </button>
+          </form>
+        </div>
+      );
     } else
       component = ( //logged in - render different routes
         <React.Fragment>
-          <section className="profile">
+          {/* <section className="profile">
             <div>
               <img width="100" src={profilePic} />
               <p>Hello, {userName}!</p>
             </div>
-          </section>
+          </section> */}
           <Route
             path="/fridge"
             render={(routeProps) => (
@@ -121,7 +127,12 @@ class MainContainer extends Component {
           <Route
             path="/dashboard"
             render={(routeProps) => (
-              <Dashboard {...routeProps} getIngredients={getIngredients} profilePic={profilePic} userName={userName}/>
+              <Dashboard
+                {...routeProps}
+                getIngredients={getIngredients}
+                profilePic={profilePic}
+                userName={userName}
+              />
             )}
             isAuthed={true}
           />
@@ -142,21 +153,22 @@ class MainContainer extends Component {
     if (hasInstructions) {
       console.log('inside has Recipes', hasInstructions);
       console.log('recipesessss', this.props.summary);
+      console.log(this.props.externaUrl);
       component = (
         <Instructions
           summary={this.props.summary}
           summaryPicUrl={this.props.summaryPicUrl}
           summaryTitle={this.props.summaryTitle}
+          prepTime={this.props.prepTime}
+          externalUrl={this.props.externalUrl}
+          diet={this.props.diet}
         />
       );
     }
 
-
     return (
       <BrowserRouter>
-        <div className="MainContainer">
-          {component}
-        </div>
+        <div className="MainContainer">{component}</div>
       </BrowserRouter>
     );
   }

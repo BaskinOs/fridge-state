@@ -16,11 +16,10 @@ const Recipes = (props) => {
   });
   return (
     <div className="Recipes">
-      <h2>We are in Recipes</h2>
+      <h2>Results:</h2>
       {recipes}
-      <Button href="/instructions">Go to Instructions</Button>
-      <br />
-      <Button href="/dashboard">Back to Dashboard</Button>
+
+      <Button href="/dashboard">Dashboard</Button>
     </div>
   );
 };

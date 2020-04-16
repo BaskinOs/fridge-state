@@ -16,7 +16,7 @@ const userReducer = (state = userState, action) => {
       console.log('userReducer USER_LOGIN action.payload', action.payload);
       return {
         userId: action.payload.user._id,
-        userName: action.payload.user.userName,
+        userName: action.payload.user.userName.replace(/ .*/, ''),
         profilePic: action.payload.user.picURL,
         ingredients: [...action.payload.user.ingredients],
         savedRecipes: [...action.payload.user.savedRecipes],

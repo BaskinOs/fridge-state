@@ -45,10 +45,13 @@ const PickIngredients = (props) => {
   });
   return (
     <div className="fridgeState">
-      <h4>Pick Ingredients</h4>
+      <h4>Choose Ingredients</h4>
       <div className="ingredientsList">
         <ul>{ingredients}</ul>
-        <Button id="button">Show me the Recipes</Button>
+        <Button id="button">Show Recipes</Button>
+        <Button className="menuBtn" id="editFridgeBtn" href="/fridge">
+          Edit Fridge
+        </Button>
       </div>
     </div>
   );
