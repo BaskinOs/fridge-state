@@ -73,7 +73,7 @@ export const updateIngredient = (event) => ({
 
 export const pickIngredients = (string) => (dispatch, getState) => {
   axios
-    .post('/recipes/recipe', {
+    .post('/fetchrecipes/recipe', {
       ingredients: string
     })
     .then(({ data }) => {
