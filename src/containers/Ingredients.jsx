@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, DropdownButton, Dropdown, ListGroup } from 'react-bootstrap';
 
 const Ingredients = (props) => {
+  // props.getRecipes();
   return (
     <div className="Ingredients">
       <h2>We are in Ingredients</h2>
@@ -21,10 +22,7 @@ const Ingredients = (props) => {
       </ListGroup>
       <br></br>
       <br></br>
-      <Button href="/recipes" recipeQuery={recipeQuery}>
-        Show me the Recipes
-      </Button>{' '}
-      <br />
+      <Button href="/recipes">Show me the Recipes</Button> <br />
       <Button href="/dashboard">Back to Dashboard</Button>
     </div>
   );

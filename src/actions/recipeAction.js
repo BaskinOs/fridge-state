@@ -1,33 +1,78 @@
 import axios from 'axios';
 import * as types from '../constants/actionTypes';
 
-export const getRecipes = () => (dispatch, getState) =>
-  axios
-    .get('/', {})
-    .then(({ data }) => {
-      console.log(data);
-      dispatch({
-        type: types.GET_RECIPES,
-        payload: data
-      });
-    })
-    .catch((err) => console.log(`ERR in getRecipes Action: ${err}`));
+export function getRecipesAction(dispatch, getState) {
+  // const { ingredient } = getState().ingredient;
+  return function (dispatch) {
+    dispatch({
+      type: types.REQUEST_RECIPES,
+      payload: 'Placeholder'
+    });
 
-export const getInstructions = () => (dispatch, getState) =>
-  axios
-    .get('/', {})
-    .then(({ data }) => {
-      console.log(data);
-      dispatch({
-        type: types.GET_INSTRUCTIONS,
-        payload: data
-      });
-    })
-    .catch((err) => console.log(`ERR in getInstructions Action: ${err}`));
+    fetch(
+      'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=1&ranking=1&ignorePantry=true&ingredients=apples,flour,sugar',
+      {
+        method: 'GET',
+        headers: {
+          'x-rapidapi-host':
+            'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+          'x-rapidapi-key': '573c26c799msh27b6667d63bc248p16cd7bjsnb8a840afd3f5'
+        }
+      }
+    )
+      .then((res) => res.json())
+      .then((data) =>
+        dispatch({
+          type: types.RECEIVE_RECIPES,
+          payload: data
+        })
+      )
+      .catch((err) =>
+        dispatch({
+          type: types.FAILED_RECIPES,
+          payload: err
+        })
+      );
+  };
+}
+
+export function getInstructions(dispatch, getState) {
+  return function (dispatch) {
+    dispatch({
+      type: types.REQUEST_INSTRUCTIONS,
+      payload: 'placeholder'
+    });
+
+    fetch(
+      'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/48191/information',
+      {
+        method: 'GET',
+        headers: {
+          'x-rapidapi-host':
+            'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+          'x-rapidapi-key': '573c26c799msh27b6667d63bc248p16cd7bjsnb8a840afd3f5'
+        }
+      }
+    )
+      .then((res) => res.json())
+      .then((data) =>
+        dispatch({
+          type: types.RECEIVED_INSTRUCTIONS,
+          payload: data
+        })
+      )
+      .catch((err) =>
+        dispatch({
+          type: types.FAILED_INSTRUCTIONS,
+          payload: err
+        })
+      );
+  };
+}
 
 // recipeQuery() {
 //   let apiString =
-//     'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=';
+//     'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ignorePantry=false&ingredients=apples,flour,sugar';
 
 //   apiString += `${numOfRecipe}`;
 //   apiString += `&ranking=1&ignorePantry=false&ingredients=`;
@@ -66,6 +111,23 @@ export const getInstructions = () => (dispatch, getState) =>
 //       console.log(`Error in recipe options fetch: ERR: ${err}`)
 //     );
 // }
+
+/**
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
 
 // instructionQuery(e) {
 //   let apiString = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/`;

@@ -14,11 +14,12 @@ import Ingredients from './Ingredients';
 import Recipes from './Recipes';
 import Instructions from './Instructions';
 import Dashboard from './Dashboard';
-import axios from 'axios';
+// import axios from 'axios';
 
 const mapStateToProps = (state) => ({
   ingredientInput: state.ingredient.ingredientInput,
-  ingredients: state.ingredient.ingredients
+  ingredients: state.ingredient.ingredients,
+  recipes: state.recipes
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -31,6 +32,10 @@ class MainContainer extends Component {
   constructor(props) {
     super(props);
   }
+
+  // componentDidMount() {
+  //   this.props.getRecipesAction();
+  // }
 
   render() {
     // console.log(this.props, 'This is PROPS');
