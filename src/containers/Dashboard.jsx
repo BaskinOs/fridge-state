@@ -24,10 +24,6 @@ const Dashboard = (props) => {
         </Media>
       </section>
       <SavedRecipes savedRecipes={props} />
-      <img
-        id="fridgeImg"
-        src="https://cdn.clipart.email/58dd1c9ffac390819ca83c8a0d175811_refrigerator-black-and-white-transparent-png-clipart-free-_512-512.png"
-      />
       <FridgeState />
       <Button href="/ingredients">Choose Ingredients</Button> <br />
       <Button className="menuBtn" id="editFridgeBtn" href="/fridge">

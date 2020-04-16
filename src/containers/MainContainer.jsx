@@ -77,28 +77,26 @@ class MainContainer extends Component {
 
       // component = <Landing />;
       component = (
-        <div className="landing">
-          <img
-            src="http://getdrawings.com/free-icon-bw/food-icon-white-19.png"
-            width="300"
-          />
-          <p>Welcome to FridgeState!</p>
-          <form id="login-form" method="GET" action="/auth/google">
-            <button className="loginBtn" id="loginBtn" type="submit">
-              Login with Google
-            </button>
-          </form>
-        </div>
-      );
+      <div className='landing'>
+        <img src="http://getdrawings.com/free-icon-bw/food-icon-white-19.png" width='300'/>
+        <p>Welcome to FridgeState!</p>
+        <form id="login-form" method="GET" action="/auth/google">
+          <button className="loginBtn" id="loginBtn" type="submit">
+            Login with Google
+          </button>
+        </form>
+      </div>
+      )
     } else
       component = ( //logged in - render different routes
         <React.Fragment>
-          {/* <section className="profile">
-            <div>
-              <img width="100" src={profilePic} />
-              <p>Hello, {userName}!</p>
-            </div>
-          </section> */}
+          <Route
+            exact path={["/", "/dashboard"]}
+            render={(routeProps) => (
+              <Dashboard {...routeProps} getIngredients={getIngredients} profilePic={profilePic} userName={userName}/>
+            )}
+            isAuthed={true}
+          />
           <Route
             path="/fridge"
             render={(routeProps) => (
@@ -123,18 +121,6 @@ class MainContainer extends Component {
           <Route
             path="/instructions"
             render={(props) => <Instructions {...props} />}
-          />
-          <Route
-            path="/dashboard"
-            render={(routeProps) => (
-              <Dashboard
-                {...routeProps}
-                getIngredients={getIngredients}
-                profilePic={profilePic}
-                userName={userName}
-              />
-            )}
-            isAuthed={true}
           />
         </React.Fragment>
       );

@@ -39,13 +39,14 @@ const Instructions = (props) => {
         <h2>{props.summaryTitle}</h2>
         {imageArray}
         <p>Prep Time: {props.prepTime}</p>
-        <img src={props.summaryPicUrl} />
-        <p>{props.summary}</p>
-        <p>
+        <img className='recipeImg' src={props.summaryPicUrl} />
+        <p className='recipeSummary'>
+          {/*converts string to html in jsx */}
+          <td dangerouslySetInnerHTML={{__html: props.summary}} />
+        </p>
           <button className="menuBtn" onClick={() => sourceButtonClicked()}>
             Source
           </button>
-        </p>
       </div>
       <br />
       <Button href="/ingredients">Pick Ingredients</Button> <br />
