@@ -4,10 +4,10 @@ const fetch = require('node-fetch');
 const recipeController = {};
 
 recipeController.getRecipes = (req, res, next) => {
-  // const { ing1, ing2, ing3, ing4, ing5 } = req.body;
+  const { ingredients } = req.body;
 
   fetch(
-    'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=1&ranking=1&ignorePantry=true&ingredients=apples,flour,sugar',
+    `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=3&ranking=1&ignorePantry=true&ingredients=${ingredients}`,
     {
       method: 'GET',
       headers: {
