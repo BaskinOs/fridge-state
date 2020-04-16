@@ -21,24 +21,31 @@ userController.verify = (req, res, next) => {
     }
   } catch (err) {
     return next({
-      log: `Error in middleware userController.verifyUser: ${err}`
+      log: `Error in middleware userController.verify: ${err}`
     });
   }
 };
 
 userController.getIngredients = (req, res, next) => {
   console.log('userCont.getIngred req.session.passport', req.session.passport)
-  if (req.session.passport.user) { //passport must be valid
-    let id = req.session.passport.user;
-    ModelUser.findById(id, (err, user) => {
-      if (err) {
-        console.log(err);
-      }
-      res.locals.ingredients = user.ingredients;
-      console.log(res.locals.ingredients);
-      return next();
-    });
-  }
+ try {
+   if (req.session.passport.user) { //passport must be valid
+     let id = req.session.passport.user;
+     ModelUser.findById(id, (err, user) => {
+       if (err) {
+         console.log(err);
+       }
+       res.locals.ingredients = user.ingredients;
+       console.log(res.locals.ingredients);
+       return next();
+     });
+   }
+ } catch (err) {
+  return next({
+    log: `Error in middleware userController.getIngredients: ${err}`
+  });
+}
+ 
 };
 
 userController.postUser = (req, res, next) => {
@@ -63,56 +70,74 @@ userController.getItems = (req, res, next) => {
 
 userController.getRecipes = (req, res, next) => {
   console.log('userCont.getRecipes req.session.passport', req.session.passport)
-  if (req.session.passport.user) {
-    let id = req.session.passport.user;
-    ModelUser.findById(id, (err, user) => {
-      console.log(user);
-      if (err) {
-        return next(err);
-      }
-      res.locals.savedRecipes = user.savedRecipes;
-      return next();
+  try {
+    if (req.session.passport.user) {
+      let id = req.session.passport.user;
+      ModelUser.findById(id, (err, user) => {
+        console.log(user);
+        if (err) {
+          return next(err);
+        }
+        res.locals.savedRecipes = user.savedRecipes;
+        return next();
+      });
+    }
+  } catch (err) {
+    return next({
+      log: `Error in middleware userController.getRecipes: ${err}`
     });
   }
 };
 
 userController.postIngredient = (req, res, next) => {
-  const { ingredient } = req.body;
-  // console.log(ingredient);
-  if (req.session.passport.user) {
-    let id = req.session.passport.user;
-    ModelUser.findOneAndUpdate(
-      { _id: id },
-      { $push: { ingredients: ingredient } },
-      { new: true }
-    )
-    .then((user) => {
-      res.locals.ingredients = user.ingredients;
-      return next();
-    })
-    .catch((err) => console.log(err));
+  try {
+    const { ingredient } = req.body;
+    // console.log(ingredient);
+    if (req.session.passport.user) {
+      let id = req.session.passport.user;
+      ModelUser.findOneAndUpdate(
+        { _id: id },
+        { $push: { ingredients: ingredient } },
+        { new: true }
+      )
+      .then((user) => {
+        res.locals.ingredients = user.ingredients;
+        return next();
+      })
+      .catch((err) => console.log(err));
+    }
+  } catch (err) {
+    return next({
+      log: `Error in middleware userController.postIngredient: ${err}`
+    });
   }
 };
 
 userController.postRecipe = (req, res, next) => {
   console.log('userCont.postRecipe req.session.passport', req.session.passport)
-  if (req.session.passport.user) {
-    let id = req.session.passport.user;
-
-    //you can add more options inside for example calories, time
-    const { recipeName, recipeUrl } = req.body;
-    const newRecipe = { recipeName, recipeUrl };
-    //id needs to be replaced dSer userId
-    ModelUser.findOneAndUpdate(
-      { _id: id },
-      { $push: { savedRecipes: newRecipe } },
-      { new: true }
-    )
-    .then((user) => {
-      res.locals.savedRecipes = user.savedRecipes;
-      return next();
-    })
-    .catch((err) => console.log(err));
+  try {
+    if (req.session.passport.user) {
+      let id = req.session.passport.user;
+  
+      //you can add more options inside for example calories, time
+      const { recipeName, recipeUrl } = req.body;
+      const newRecipe = { recipeName, recipeUrl };
+      //id needs to be replaced dSer userId
+      ModelUser.findOneAndUpdate(
+        { _id: id },
+        { $push: { savedRecipes: newRecipe } },
+        { new: true }
+      )
+      .then((user) => {
+        res.locals.savedRecipes = user.savedRecipes;
+        return next();
+      })
+      .catch((err) => console.log(err));
+    }
+  } catch (err) {
+    return next({
+      log: `Error in middleware userController.postRecipe: ${err}`
+    });
   }
 };
 
