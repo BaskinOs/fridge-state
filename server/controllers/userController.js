@@ -53,16 +53,6 @@ userController.postUser = (req, res, next) => {
   });
 };
 
-userController.getItems = (req, res, next) => {
-  ModelUser.find({}, (err, foundItems) => {
-    if (err) {
-      return next(err);
-    }
-    res.locals.ingredients = user.ingredients;
-    return next();
-  });
-};
-
 userController.getRecipes = (req, res, next) => {
   console.log('userCont.getRecipes req.session.passport', req.session.passport);
   if (req.session.passport.user) {
@@ -94,6 +84,20 @@ userController.postIngredient = (req, res, next) => {
       })
       .catch((err) => console.log(err));
   }
+};
+
+userController.deleteIngredient = (req, res, next) => {
+  const { ingredientToDelete } = req.body;
+  ModelUser.updateOne(
+    { _id: '5e9672ca8687611204c9b017' },
+    { $pull: { ingredients: ingredientToDelete } },
+    (err, foundIngredient) => {
+      if (err) {
+        return next(err);
+      }
+      return next();
+    }
+  );
 };
 
 userController.postRecipe = (req, res, next) => {
