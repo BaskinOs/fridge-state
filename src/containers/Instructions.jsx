@@ -11,7 +11,8 @@ const Instructions = (props) => {
         <p>{props.summary}</p>
       </div>
       <br />
-      <Button href="/ingredients">Pick Ingredients</Button> <br />
+      <Button href="/ingredients">Pick Ingredients</Button>
+      <br />
       <Button href="/dashboard">Go to Dashboard</Button>
     </div>
   );
