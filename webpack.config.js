@@ -3,23 +3,23 @@ const webpack = require('webpack');
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, "dist/"),
-    filename: "bundle.js",
-    publicPath: "/dist/",
+    path: path.resolve(__dirname, 'dist/'),
+    filename: 'bundle.js',
+    publicPath: '/dist/'
   },
   devServer: {
     port: 8080,
-    contentBase: path.join(__dirname, "public"),
+    contentBase: path.join(__dirname, 'public'),
     proxy: [
       {
-        context: ['/api', '/auth'],
-        target: 'http://localhost:3000',
-      },
+        context: ['/api', '/auth', '/recipes'],
+        target: 'http://localhost:3000'
+      }
     ],
     hot: true,
-    historyApiFallback: true,
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -35,6 +35,6 @@ module.exports = {
       }
     ]
   },
-  resolve: { extensions: ["*", ".js", ".jsx"] },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  resolve: { extensions: ['*', '.js', '.jsx'] },
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 };
