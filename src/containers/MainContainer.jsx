@@ -72,6 +72,7 @@ class MainContainer extends Component {
       isLoggedIn
     } = this.props;
 
+    console.log('Main Container', deleteIngredient);
     if (!isLoggedIn) {
       //not logged in
 

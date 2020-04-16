@@ -39,23 +39,17 @@ const Instructions = (props) => {
         <h2>{props.summaryTitle}</h2>
         {imageArray}
         <p>Prep Time: {props.prepTime}</p>
-        <img className='recipeImg' src={props.summaryPicUrl} />
-        <p className='recipeSummary'>
+        <img className="recipeImg" src={props.summaryPicUrl} />
+        <p className="recipeSummary">
           {/*converts string to html in jsx */}
-          <td dangerouslySetInnerHTML={{__html: props.summary}} />
+          <td dangerouslySetInnerHTML={{ __html: props.summary }} />
         </p>
-          <button className="menuBtn" onClick={() => sourceButtonClicked()}>
-            Source
-          </button>
+        <button className="menuBtn" onClick={() => sourceButtonClicked()}>
+          Source
+        </button>
       </div>
-      <br />
-      <Button href="/ingredients">Pick Ingredients</Button>
-      <br />
-      <Button onClick={() => props.clearSummary()}>Recipes</Button>
-      {/* <button onClick={() => props.clearSummary()}>Recipes</button> */}
-      <br />
-
-      <Button href="/dashboard">Go to Dashboard</Button>
+      <Button onClick={() => props.clearSummary()}>Back to Recipes</Button>
+      <Button href="/dashboard">Dashboard</Button>
     </div>
   );
 };

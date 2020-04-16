@@ -18,7 +18,7 @@ const Recipes = (props) => {
     <div className="Recipes">
       <h2>Results:</h2>
       {recipes}
-
+      <Button href="/ingredients">Back to Ingredients</Button> <br />
       <Button href="/dashboard">Dashboard</Button>
     </div>
   );
