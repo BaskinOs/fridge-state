@@ -88,6 +88,13 @@ class MainContainer extends Component {
       component = ( //logged in - render different routes
         <React.Fragment>
           <Route
+            exact path={["/", "/dashboard"]}
+            render={(routeProps) => (
+              <Dashboard {...routeProps} getIngredients={getIngredients} profilePic={profilePic} userName={userName}/>
+            )}
+            isAuthed={true}
+          />
+          <Route
             path="/fridge"
             render={(routeProps) => (
               <Fridge
@@ -112,13 +119,7 @@ class MainContainer extends Component {
             path="/instructions"
             render={(props) => <Instructions {...props} />}
           />
-          <Route
-            path={["/", "/dashboard"]}
-            render={(routeProps) => (
-              <Dashboard {...routeProps} getIngredients={getIngredients} profilePic={profilePic} userName={userName}/>
-            )}
-            isAuthed={true}
-          />
+ 
         </React.Fragment>
       );
 

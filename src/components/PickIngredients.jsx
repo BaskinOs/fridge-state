@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) =>
 const PickIngredients = (props) => {
   //ingredients will populate here
   console.log('fridgeState props', props.ingredientsList);
-  $('#button').on('click', function () {
+  $('#showRecipeBtn').on('click', function () {
     let arr = [];
     $(':checkbox').each(function () {
       if ($(this).is(':checked')) {
@@ -45,11 +45,11 @@ const PickIngredients = (props) => {
   });
   return (
     <div className="fridgeState">
-      <h4>Pick Ingredients</h4>
       <div className="ingredientsList">
         <ul>{ingredients}</ul>
-        <Button id="button">Show me the Recipes</Button>
       </div>
+      <Button id="showRecipeBtn">Show me the Recipes</Button>
+      <Button id='backBtn' href="/dashboard">Back to Dashboard</Button>
     </div>
   );
 };

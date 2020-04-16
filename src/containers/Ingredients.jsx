@@ -6,9 +6,8 @@ const Ingredients = (props) => {
   // props.getRecipes();
   return (
     <div className="Ingredients">
-      <h2>We are in Ingredients</h2>
+      <h2>Pick Ingredients</h2>
       <PickIngredients getRecipes={props.getRecipes} />
-      <Button href="/dashboard">Back to Dashboard</Button>
     </div>
   );
 };

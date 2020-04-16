@@ -1,11 +1,21 @@
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, InputGroup, FormControl } from 'react-bootstrap';
 import FridgeState from '../components/FridgeState';
 
 const Fridge = (props) => {
   return (
     <div className="Fridge">
       <h2>Fridge</h2>
+      {/* <InputGroup className="mb-3">
+        <FormControl
+          placeholder="Add ingredients to your Fridge"
+          aria-label="Add ingredients"
+        />
+        <InputGroup.Append>
+          <Button variant="outline-secondary">Button</Button>
+        </InputGroup.Append>
+      </InputGroup> */}
+
       <Form
         onSubmit={(e) => {
           e.preventDefault();
@@ -31,8 +41,8 @@ const Fridge = (props) => {
         </Button>
       </Form>
       <FridgeState deleteIngredient={props.deleteIngredient} />
-      <Button href="/ingredients">Pick Ingredients</Button> <br />
-      <Button href="/dashboard">Back to Dashboard</Button>
+      <Button id='pickIngBtn' href="/ingredients">Pick Ingredients</Button>
+      <Button id='backBtn' href="/dashboard">Back to Dashboard</Button>
     </div>
   );
 };
