@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Accordion, Card, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 // import { bindActionCreators } from 'redux';
 // import * as RecipeActions from '../actions/recipeAction';
 
@@ -20,13 +22,15 @@ const FridgeState = (props) => {
     if (props.deleteIngredient) {
       return (
         <div key={`ingred${index}`}>
-          <li>{item}</li>
-          <Button
-            id="deleteButton"
+          <li>
+            {item}
+            <button
+            className="deleteButton"
             onClick={() => props.deleteIngredient(item)}
           >
-            Delete
-          </Button>
+            <FontAwesomeIcon icon={faTrash} color='#4885ed' />
+          </button>
+          </li>
         </div>
       );
     } else {

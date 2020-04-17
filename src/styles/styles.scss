@@ -72,6 +72,11 @@ button,
   align-self: flex-start;
   margin: 0;
 }
+.deleteButton {
+  background-color: Transparent;
+  margin: 0 .2em 0 0;
+}
+
 
 //pages
 .App {
@@ -101,6 +106,35 @@ button,
   margin: 1.5em;
 }
 
+//Fridge
+.Fridge {
+  .form-row {
+    display: flex;
+    // flex-direction
+  }
+  input {
+    // margin-top: .5em;
+    // justify-self: center;
+    width: 20rem;
+  }
+  #colText {
+    padding: 0;
+    margin-top: .7em;
+  }
+  #postButton {
+    background-color: transparent;
+    font-size: 2.5em;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.fridgeState {
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+}
+
 //Recipes
 .Recipes {
   display: flex;
@@ -127,9 +161,12 @@ button,
   align-items: center;
 }
 
+
 //Instructions
 .Instructions {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .summary {
     display: flex;
     flex-direction: column;

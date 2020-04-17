@@ -49,12 +49,15 @@ const Instructions = (props) => {
         </button>
       </div>
       <br />
-      <Button id="pickIngBtn" href="/ingredients">
-        Choose Ingredients
-      </Button>
+      <div>
+
       <Button id="recipeBtn" onClick={() => props.clearSummary()}>
         Back to Recipes
       </Button>
+      <Button id="pickIngBtn" href="/ingredients">
+        Choose Ingredients
+      </Button>
+      </div>
       <br />
       <Button id="backBtn" href="/dashboard">
         Dashboard
